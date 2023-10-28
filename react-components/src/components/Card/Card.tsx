@@ -1,6 +1,7 @@
 import { Component } from 'react';
 
-interface CardProps {
+export interface CardProps {
+  id: string;
   name: string;
   desc: string;
   imgURL: string;
