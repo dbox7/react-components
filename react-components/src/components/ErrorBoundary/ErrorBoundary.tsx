@@ -8,10 +8,7 @@ export class ErrorBoundary extends Component<
   { fallback: string; children: ReactNode },
   { hasError: boolean }
 > {
-  constructor(props: { fallback: string; children: ReactNode }) {
-    super(props);
-    this.state = { hasError: true };
-  }
+  state = { hasError: false };
 
   static getDerivedStateFromError() {
     return { hasError: true };
