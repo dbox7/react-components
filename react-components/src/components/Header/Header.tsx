@@ -2,7 +2,7 @@ import { Component, ReactNode, ChangeEvent } from 'react';
 import { fetchCharacters } from '../../api';
 import { ICharacter, callback } from '../../types';
 import logo from '../../assets/logo.png';
-import './Header.css'
+import './Header.css';
 
 export class Header extends Component<
   Readonly<{ callback: callback<ICharacter[]> }>,

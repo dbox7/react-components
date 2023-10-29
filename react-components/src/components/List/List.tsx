@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Card } from '../Card/Card';
 import { ICharacter } from '../../types';
-import './List.css'
+import './List.css';
 
 type ListProps<T> = {
   queue: T[];

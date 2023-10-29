@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import './Card.css'
+import './Card.css';
 
 export interface CardProps {
   id: number;
@@ -13,7 +13,11 @@ export class Card extends Component<CardProps> {
   render() {
     return (
       <div className="card">
-        <img src={this.props.imgURL} alt="character image" className="card__img"/>
+        <img
+          src={this.props.imgURL}
+          alt="character image"
+          className="card__img"
+        />
         <div className="card__info">
           <div className="card__name">{this.props.name}</div>
           <div className="card__description">
