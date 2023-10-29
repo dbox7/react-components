@@ -2,4 +2,11 @@
     position: absolute;
     top: 20px;
     right: 20px;
+    background-color: #080805;
+    border-color: #fd9d0d;
+    color: #f70d0d;
+}
+
+.error-generic:hover {
+    outline: 2px solid #ff7300;
 }

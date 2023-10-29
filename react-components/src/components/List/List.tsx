@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Card } from '../Card/Card';
 import { ICharacter } from '../../types';
+import './List.css'
 
 type ListProps<T> = {
   queue: T[];
@@ -18,6 +19,7 @@ export class List extends Component<ListProps<ICharacter>> {
             name={item.name}
             desc={item.species}
             imgURL={item.image}
+            origin={item.origin.name}
           />
         ))}
         ;
