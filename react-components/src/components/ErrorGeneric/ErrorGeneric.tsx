@@ -1,6 +1,6 @@
 import { Component, ReactNode } from 'react';
 
-import './ErrorGeneric.css';
+import './ErrorGeneric.css'
 
 export class ErrorGeneric extends Component {
   state: Readonly<{ hasError: boolean }> = { hasError: false };
