@@ -15,7 +15,7 @@
     }
   },
   "lint-staged": {
-    "*": "prettier --write"
+    "*": "prettier --write *.{ts,tsx}"
   },
   "dependencies": {
     "react": "^18.2.0",
