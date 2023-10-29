@@ -1,22 +1,24 @@
 import { Component, ReactNode, ChangeEvent } from 'react';
 import { fetchCharacters } from '../../api';
+import { ICharacter, callback } from '../../types';
 
-export class Header extends Component {
-  state: Readonly<{ inputValue: string }> = {
-    inputValue: '',
+export class Header extends Component<
+  Readonly<{ callback: callback<ICharacter[]> }>,
+  Readonly<{ inputValue: string }>
+> {
+  state = {
+    inputValue: localStorage.getItem('search') || '',
   };
-
-  componentDidMount(): void {
-    const data = fetchCharacters();
-    data.then((response) => console.log(response));
-  }
 
   handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     this.setState({ inputValue: event.target.value });
   };
 
   handleButtonClick = () => {
-    this.setState({ inputValue: '' });
+    localStorage.setItem('search', this.state.inputValue);
+    fetchCharacters(this.state.inputValue).then((res) => {
+      this.props.callback(res.results);
+    });
   };
 
   render(): ReactNode {
@@ -35,3 +37,5 @@ export class Header extends Component {
     );
   }
 }
+
+// Header.contextType = items;
