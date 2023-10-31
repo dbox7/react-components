@@ -10,3 +10,9 @@
   text-align: center;
   background-color: #020201;
 }
+
+.not-found {
+  margin: 40px;
+  font-size: 32px;
+  color: #d1d94d;
+}

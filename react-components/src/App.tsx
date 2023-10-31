@@ -17,7 +17,6 @@ class App extends Component<object, { data: ICharacter[] }> {
         this.setState({ data: response.results })
       );
     } else {
-      console.log(JSON.parse(tempData!));
       this.setState({ data: JSON.parse(tempData) });
     }
   }
@@ -31,7 +30,11 @@ class App extends Component<object, { data: ICharacter[] }> {
       <ErrorBoundary fallback="something was wrong">
         <ErrorGeneric />
         <Header callback={this.updateState.bind(this)} />
-        <List queue={this.state.data} />
+        {this.state.data.length == 0 ? (
+          <div className="not-found">Not found</div>
+        ) : (
+          <List queue={this.state.data} />
+        )}
       </ErrorBoundary>
     );
   }

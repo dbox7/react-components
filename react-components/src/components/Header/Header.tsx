@@ -17,14 +17,17 @@ export class Header extends Component<
   };
 
   handleButtonClick = () => {
-    localStorage.setItem('search', this.state.inputValue);
-    const data = localStorage.getItem('data');
-    if (data !== null) {
-      this.props.callback(JSON.parse(data!));
-    } else {
+    const searchValue = localStorage.getItem('search');
+    if (searchValue !== this.state.inputValue) {
       fetchCharacters(this.state.inputValue).then((res) => {
-        this.props.callback(res.results);
-        localStorage.setItem('data', JSON.stringify(res.results));
+        if (res.error) {
+          this.props.callback([]);
+          localStorage.setItem('data', JSON.stringify([]));
+        } else {
+          this.props.callback(res.results);
+          localStorage.setItem('data', JSON.stringify(res.results));
+        }
+        localStorage.setItem('search', this.state.inputValue);
       });
     }
   };
