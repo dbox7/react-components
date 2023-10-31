@@ -17,6 +17,7 @@ class App extends Component<object, { data: ICharacter[] }> {
         this.setState({ data: response.results })
       );
     } else {
+      console.log(JSON.parse(tempData!));
       this.setState({ data: JSON.parse(tempData) });
     }
   }
@@ -26,7 +27,6 @@ class App extends Component<object, { data: ICharacter[] }> {
   };
 
   render() {
-    console.log(this.state.data);
     return (
       <ErrorBoundary fallback="something was wrong">
         <ErrorGeneric />

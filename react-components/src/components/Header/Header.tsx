@@ -1,8 +1,8 @@
 import { Component, ReactNode, ChangeEvent } from 'react';
 import { fetchCharacters } from '../../api';
 import { ICharacter, callback } from '../../types';
-import logo from '../../assets/logo.png'
-import './Header.css'
+import logo from '../../assets/logo.png';
+import './Header.css';
 
 export class Header extends Component<
   Readonly<{ callback: callback<ICharacter[]> }>,
@@ -18,9 +18,15 @@ export class Header extends Component<
 
   handleButtonClick = () => {
     localStorage.setItem('search', this.state.inputValue);
-    fetchCharacters(this.state.inputValue).then((res) => {
-      this.props.callback(res.results);
-    });
+    const data = localStorage.getItem('data');
+    if (data !== null) {
+      this.props.callback(JSON.parse(data!));
+    } else {
+      fetchCharacters(this.state.inputValue).then((res) => {
+        this.props.callback(res.results);
+        localStorage.setItem('data', JSON.stringify(res.results));
+      });
+    }
   };
 
   render(): ReactNode {
@@ -46,5 +52,3 @@ export class Header extends Component<
     );
   }
 }
-
-// Header.contextType = items;
