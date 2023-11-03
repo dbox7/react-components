@@ -10,7 +10,7 @@ const DataLayout: FC = () => {
   const props = useParams();
 
   useEffect(() => {
-    getAllGifs(Number(props.page)).then((res: IResponse) => {
+    getAllGifs(Number(props.page), 100).then((res: IResponse) => {
       console.log(res);
       setGifs(res.data);
     });
