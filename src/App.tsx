@@ -1,31 +1,25 @@
-// import { useEffect } from 'react';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { FC } from 'react';
+
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
-// import { getGifsByQuery } from './api';
+import RootLayout from './layouts/RootLayout/RootLayout';
+import Details from './components/Details/Details';
+import DataLayout from './layouts/DataLayout/DataLayout';
 
 import './App.css';
-import {
-  NavLink,
-  Route,
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromElements,
-} from 'react-router-dom';
-// import Header from './components/Header/Header';
-import RootLayout from './layouts/RootLayout';
-import Details from './components/Details/Details';
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<RootLayout />}>
-      <Route path="/:id" element={<Details />} />
-    </Route>
-  )
-);
-
-const App = () => {
+const App: FC = () => {
   return (
     <ErrorBoundary fallback="something wrong">
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<RootLayout />}>
+            <Route path="page/:page" element={<DataLayout />}>
+              <Route path="details/:id" element={<Details />} />
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </ErrorBoundary>
   );
 };

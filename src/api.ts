@@ -23,7 +23,7 @@ export const getGifsByQuery = (query: string, limit: number = BASE_LIMIT) => {
     .catch((err) => err.json());
 };
 
-export const getAllGifs = (limit = BASE_LIMIT) => {
+export const getAllGifs = (limit: number = BASE_LIMIT) => {
   let url = `${BASE_URL}/trending?`;
   url = addLimit(url, limit);
   url = addApiKey(url);

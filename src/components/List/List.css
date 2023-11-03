@@ -1,5 +1,13 @@
 .list {
   display: flex;
+  justify-content: center;
   flex: 1;
   flex-wrap: wrap;
+  gap: 10px;
+  width: fit-content;
+}
+
+.list_detailed {
+  max-height: 80vh;
+  overflow-y: scroll;
 }

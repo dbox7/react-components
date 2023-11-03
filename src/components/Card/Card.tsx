@@ -1,11 +1,17 @@
 import { NavLink } from 'react-router-dom';
+import { FC } from 'react';
+import { IGif } from '../../types';
 
 import './Card.css';
 
-const Card = ({ item }) => {
+interface ICard {
+  item: IGif;
+}
+
+const Card: FC<ICard> = ({ item }) => {
   return (
-    <NavLink to={item.id}>
-      <img src={item.images.preview_gif.url} alt="" className="Card" />
+    <NavLink to={`details/${item.id}`} className="card">
+      <img src={item.images.preview_gif.url} alt="" className="card__img" />
     </NavLink>
   );
 };
