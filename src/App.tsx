@@ -1,43 +1,33 @@
-import { Component } from 'react';
-import './App.css';
+// import { useEffect } from 'react';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
-import { ErrorGeneric } from './components/ErrorGeneric/ErrorGeneric';
-import { Header } from './components/Header/Header';
-import { List } from './components/List/List';
-import { fetchCharacters } from './api';
-import { ICharacter, IResponse, callback } from './types';
+// import { getGifsByQuery } from './api';
 
-class App extends Component<object, { data: ICharacter[] }> {
-  state = { data: [] };
+import './App.css';
+import {
+  NavLink,
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from 'react-router-dom';
+// import Header from './components/Header/Header';
+import RootLayout from './layouts/RootLayout';
+import Details from './components/Details/Details';
 
-  componentDidMount(): void {
-    const tempData = localStorage.getItem('data');
-    if (!tempData) {
-      fetchCharacters().then((response: IResponse) =>
-        this.setState({ data: response.results })
-      );
-    } else {
-      this.setState({ data: JSON.parse(tempData) });
-    }
-  }
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<RootLayout />}>
+      <Route path="/:id" element={<Details />} />
+    </Route>
+  )
+);
 
-  updateState: callback<ICharacter[]> = (value) => {
-    this.setState({ data: value });
-  };
-
-  render() {
-    return (
-      <ErrorBoundary fallback="something was wrong">
-        <ErrorGeneric />
-        <Header callback={this.updateState.bind(this)} />
-        {this.state.data.length == 0 ? (
-          <div className="not-found">Not found</div>
-        ) : (
-          <List queue={this.state.data} />
-        )}
-      </ErrorBoundary>
-    );
-  }
-}
+const App = () => {
+  return (
+    <ErrorBoundary fallback="something wrong">
+      <RouterProvider router={router} />
+    </ErrorBoundary>
+  );
+};
 
 export default App;

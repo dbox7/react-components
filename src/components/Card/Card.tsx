@@ -1,33 +1,13 @@
-import { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+
 import './Card.css';
 
-export interface CardProps {
-  id: number;
-  name: string;
-  desc: string;
-  origin: string;
-  imgURL: string;
-}
+const Card = ({ item }) => {
+  return (
+    <NavLink to={item.id}>
+      <img src={item.images.preview_gif.url} alt="" className="Card" />
+    </NavLink>
+  );
+};
 
-export class Card extends Component<CardProps> {
-  render() {
-    return (
-      <div className="card">
-        <img
-          src={this.props.imgURL}
-          alt="character image"
-          className="card__img"
-        />
-        <div className="card__info">
-          <div className="card__name">{this.props.name}</div>
-          <div className="card__description">
-            <b>Species:</b> {this.props.desc}
-          </div>
-          <div className="card__description">
-            <b>Origin:</b> {this.props.origin}
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+export default Card;
