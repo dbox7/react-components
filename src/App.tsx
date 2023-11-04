@@ -13,7 +13,7 @@ const App: FC = () => {
     <ErrorBoundary fallback="something wrong">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<RootLayout />}>
+          <Route path="/*" element={<RootLayout />}>
             <Route path="page/:page" element={<DataLayout />}>
               <Route path="details/:id" element={<Details />} />
             </Route>

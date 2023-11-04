@@ -14,20 +14,22 @@ const List: FC<IList> = ({ queue }) => {
   const navigate = useNavigate();
   const props = useParams();
   return (
-    <div className={props.id == null ? 'list' : 'list list_detailed'}>
-      <div className="list">
+    <div className="list__wrap">
+      <div className={props.id == null ? 'list' : 'list list_detailed'}>
         {queue.map((item: IGif, idx: number) => (
           <Card key={idx} item={item} />
         ))}
       </div>
       <div className="pagination">
-        <button onClick={() => navigate(`/page/${Number(props.page!) - 1}`)}>
-          -
-        </button>
+        <div
+          onClick={() => navigate(`/page/${Number(props.page!) - 1}`)}
+          className="pagination_btn left"
+        />
         <span>{props.page}</span>
-        <button onClick={() => navigate(`/page/${Number(props.page!) + 1}`)}>
-          +
-        </button>
+        <div
+          onClick={() => navigate(`/page/${Number(props.page!) + 1}`)}
+          className="pagination_btn"
+        />
       </div>
     </div>
   );

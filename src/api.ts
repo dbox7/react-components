@@ -47,3 +47,11 @@ export const getAllGifs = (
     .then((res) => res.json())
     .catch((err) => err.json());
 };
+
+export const getGifById = (id: string) => {
+  let url = `${BASE_URL}/${id}?`;
+  url = addApiKey(url);
+  return fetch(url)
+    .then((res) => res.json())
+    .catch((err) => err.json());
+};

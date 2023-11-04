@@ -1,6 +1,13 @@
 .card {
-  width: 20vh;
-  height: 20vh;
+  width: 19%;
+  min-width: 200px;
+  max-width: 300px;
+  min-height: 200px;
+  max-height: 300px;
+}
+
+.card:hover {
+  outline: 2px solid #ffffff;
 }
 
 .card__img {

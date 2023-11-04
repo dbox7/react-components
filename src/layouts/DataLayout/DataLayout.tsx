@@ -1,24 +1,36 @@
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
-import { getAllGifs } from '../../api';
+import { getAllGifs, getGifsByQuery } from '../../api';
 import { IGif, IResponse } from '../../types';
 
 import List from '../../components/List/List';
 
+import loader from '../../assets/loader.gif';
+
 const DataLayout: FC = () => {
   const [gifs, setGifs] = useState<IGif[]>([]);
+  const [loading, setLoading] = useState(true);
   const props = useParams();
+  const query = useOutletContext<string>();
 
   useEffect(() => {
-    getAllGifs(Number(props.page), 100).then((res: IResponse) => {
-      console.log(res);
-      setGifs(res.data);
-    });
-  }, [props.page]);
+    setLoading(true);
+    query
+      ? getGifsByQuery(query, Number(props.page), 20).then((res: IResponse) => {
+          console.log(res);
+          setGifs(res.data);
+          setLoading(false);
+        })
+      : getAllGifs(Number(props.page), 20).then((res: IResponse) => {
+          console.log(res);
+          setGifs(res.data);
+          setLoading(false);
+        });
+  }, [props.page, query]);
 
   return (
-    <div className="list__wrap">
-      <List queue={gifs} />
+    <div className="data__wrap">
+      {loading ? <img src={loader} alt="" /> : <List queue={gifs} />}
       <Outlet />
     </div>
   );

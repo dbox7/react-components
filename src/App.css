@@ -10,6 +10,13 @@
   background-color: #141214;
 }
 
+div {
+  margin: 0;
+  padding: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
+
 .not-found {
   margin: 40px;
   font-size: 32px;

@@ -1,4 +1,97 @@
 .details {
   display: flex;
-  flex: 2;
+  flex: 3;
+}
+
+.details__info-wrap {
+  display: flex;
+  justify-content: left;
+  gap: 20px;
+  width: 100%;
+  height: 68.5vh;
+}
+
+.details__img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.details__img.quater {
+  width: 60%;
+  height: 60vh;
+  max-height: 100%;
+}
+
+.details__img.vertical {
+  width: 50%;
+  /* height: 68.5vh; */
+  max-height: 100%;
+}
+
+.details__text-wrap {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  color: #ffffff;
+}
+
+.details__title {
+  margin-bottom: 20px;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.details__posted,
+.details__source {
+  font-size: 24px;
+}
+
+.details__user-wrap {
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+  max-height: 35%;
+}
+
+.details__user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.details__user-img {
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  min-height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.details__user-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.details__user-desc {
+  overflow-y: auto;
+}
+
+/* .details__user-desc::-webkit-scrollbar {
+  display: none;
+} */
+
+.details__user-contacts {
+  display: flex;
+  gap: 20px;
+}
+
+.details__rating {
+  margin-top: 40px;
+  font-size: 24px;
+}
+
+.details__rating span {
+  text-transform: uppercase;
+  font-size: 48px;
+  font-weight: bold;
 }

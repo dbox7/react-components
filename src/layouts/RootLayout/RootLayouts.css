@@ -1,4 +1,5 @@
-.list__wrap {
+.data__wrap {
   display: flex;
+  justify-content: center;
   margin: 40px auto 0;
 }

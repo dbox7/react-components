@@ -1,13 +1,50 @@
+.list__wrap {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 30px;
+  flex: 2;
+}
+
 .list {
   display: flex;
   justify-content: center;
-  flex: 1;
   flex-wrap: wrap;
   gap: 10px;
-  width: fit-content;
+  padding: 1px 0;
+  width: auto;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
 }
 
 .list_detailed {
-  max-height: 80vh;
+  max-height: 60vh;
   overflow-y: scroll;
+}
+
+.pagination {
+  display: flex;
+  gap: 50px;
+}
+
+.pagination span {
+  font-size: 36px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.pagination_btn {
+  width: 150px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  background: url(../../assets/arrow.svg) no-repeat center;
+  cursor: pointer;
+}
+
+.pagination_btn.left {
+  transform: rotate(180deg);
 }

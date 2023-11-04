@@ -1,8 +1,15 @@
+import { FC, useState } from 'react';
 import logo from '../../assets/logo.gif';
 
 import './Header.css';
 
-const Header = () => {
+interface IHeader {
+  setQuery: (value: string) => void;
+}
+
+const Header: FC<IHeader> = ({ setQuery }) => {
+  const [value, setValue] = useState('');
+
   return (
     <header className="header">
       <div className="header__logo">
@@ -14,10 +21,17 @@ const Header = () => {
         <div className="header__search">
           <input
             type="text"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
             className="header__input"
             placeholder="Enter your query here"
           />
-          <button className="button header__button">Search</button>
+          <button
+            className="button header__button"
+            onClick={() => setQuery(value)}
+          >
+            Search
+          </button>
         </div>
       </div>
     </header>

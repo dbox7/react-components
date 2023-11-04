@@ -13,6 +13,7 @@ export interface IGif {
   embed_url: string;
   id: string;
   images: IImages;
+  import_datetime: string;
   is_sticker: string;
   rating: string;
   slug: string;
@@ -50,24 +51,39 @@ interface IImages {
   // fixed_height_small_still;
   // fixed_width_small;
   // fixed_width_small_still;
-  // downsized;
+  downsized: {
+    url: string;
+    size: number;
+    width: string;
+    height: string;
+  };
   // downsized_still;
   // downsized_large;
   // downsized_medium;
   // downsized_small;
   // original;
-  // original_still;
+  original_still: {
+    url: string;
+    width: string;
+    height: string;
+  };
   // looping;
-  // preview
+  preview: {
+    mp4: string;
+    mp4_size: number;
+    width: string;
+    height: string;
+  };
   preview_gif: {
     url: string;
+    size: number;
     width: string;
     height: string;
   };
 }
 
 export interface IResponse {
-  data: IGif[];
+  data: IGif[] & IGif;
   meta: {
     msg: string;
     response_id: string;
