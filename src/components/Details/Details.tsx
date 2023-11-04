@@ -1,4 +1,4 @@
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams, NavLink, useNavigate } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
 
 import './Details.css';
@@ -8,6 +8,7 @@ import { IGif, IResponse } from '../../types';
 import loader from '../../assets/loader.gif';
 
 const Details: FC = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [orientation, setOrientation] = useState('quater');
   const [gif, setGifs] = useState<IGif>();
@@ -38,7 +39,13 @@ const Details: FC = () => {
       {loading ? (
         <img src={loader} alt="" />
       ) : (
-        <div className="details__info-wrap">
+        <div className={`details__info-wrap ${orientation}`}>
+          <div
+            className="details__close"
+            onClick={() => navigate(`/page/${Number(props.page!)}`)}
+          >
+            X
+          </div>
           <img
             src={gif?.images.downsized.url}
             className={`details__img ${orientation}`}
@@ -89,7 +96,9 @@ const Details: FC = () => {
               </div>
             )}
             <div className="details__rating">
-              MPAA-rating: <span>{gif?.rating}</span>
+              MPAA
+              <br />
+              rating<span>{gif?.rating}</span>
             </div>
           </div>
         </div>

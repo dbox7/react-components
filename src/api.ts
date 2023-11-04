@@ -28,7 +28,7 @@ export const getGifsByQuery = (
 ) => {
   let url = `${BASE_URL}/search?q=${query}`;
   url = addLimit(url, limit);
-  url = addOffset(url, offset * limit);
+  url = addOffset(url, (offset - 1) * limit);
   url = addApiKey(url);
   return fetch(url)
     .then((res) => res.json())
@@ -41,7 +41,7 @@ export const getAllGifs = (
 ) => {
   let url = `${BASE_URL}/trending?`;
   url = addLimit(url, limit);
-  url = addOffset(url, offset * limit);
+  url = addOffset(url, (offset - 1) * limit);
   url = addApiKey(url);
   return fetch(url)
     .then((res) => res.json())
