@@ -1,9 +1,9 @@
-import { useParams, NavLink, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
-
-import './Details.css';
 import { getGifById } from '../../api';
 import { IGif, IResponse } from '../../types';
+
+import './Details.css';
 
 import loader from '../../assets/loader.gif';
 
@@ -11,15 +11,15 @@ const Details: FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [orientation, setOrientation] = useState('quater');
-  const [gif, setGifs] = useState<IGif>();
+  const [gif, setGif] = useState<IGif>();
   const props = useParams();
 
   useEffect(() => {
-    console.log('123');
     setLoading(true);
+    console.log(props.id);
     getGifById(props.id!).then((res: IResponse) => {
       console.log(res);
-      setGifs(res.data);
+      setGif(res.data);
       setLoading(false);
     });
   }, [props.id]);
@@ -28,8 +28,8 @@ const Details: FC = () => {
     const width = Number(gif?.images.downsized.width);
     const height = Number(gif?.images.downsized.height);
     const ratio = width / height;
-    console.log(width, height, ratio);
-    if (ratio > 1.2) setOrientation('horizontal');
+    console.log(width, height, ratio, gif);
+    if (ratio > 1.25) setOrientation('horizontal');
     else if (ratio < 0.8) setOrientation('vertical');
     else setOrientation('quater');
   }, [gif]);
@@ -50,9 +50,6 @@ const Details: FC = () => {
             src={gif?.images.downsized.url}
             className={`details__img ${orientation}`}
           />
-          {/* <div className="details__img-wrap">
-            
-          </div> */}
           <div className="details__text-wrap">
             <div className="details__title">{gif?.title}</div>
             <div className="details__posted">
@@ -102,7 +99,6 @@ const Details: FC = () => {
             </div>
           </div>
         </div>
-        // <NavLink to={`/page/${props.page}`}>{gif?.id}</NavLink>
       )}
     </div>
   );

@@ -1,7 +1,29 @@
 .header {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 30px;
+  width: 100%;
+}
+
+.header__select-wrap {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+  width: 15%;
+  color: #ffffff;
+}
+
+.header__select {
+  width: 30%;
+  min-width: 50px;
+  padding: 5px;
+  color: #a0a0a0;
+  background-color: #1a181a;
 }
 
 .header__logo {
@@ -11,10 +33,12 @@
 }
 
 .header__logo-img {
-  width: 50%;
+  width: 20%;
+  min-width: 250px;
 }
 
 .header__logo-text {
+  margin-bottom: 10px;
   font-size: 150%;
   color: #ffffff;
 }
@@ -25,7 +49,7 @@
   gap: 15px;
 }
 
-.header_desc {
+.header__desc {
   font-size: 20px;
   color: #ffffff;
 }
@@ -33,7 +57,8 @@
 .header__search {
   display: flex;
   gap: 20px;
-  width: 80%;
+  width: 25%;
+  min-width: 310px;
   margin: 0 auto;
   padding: 10px;
   border-radius: 5px;
@@ -57,6 +82,7 @@
 
 .header__button {
   display: flex;
+  justify-content: center;
   flex: 1;
   max-width: 120px;
   border-radius: 5px;

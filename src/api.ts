@@ -18,7 +18,7 @@ const addOffset = (url: string, offset: number = 0): string => {
   if (offset !== BASE_OFFSET) {
     return `${url}&offset=${offset}`;
   }
-  return `${url}&limit=${BASE_LIMIT}`;
+  return `${url}&offset=${BASE_OFFSET}`;
 };
 
 export const getGifsByQuery = (

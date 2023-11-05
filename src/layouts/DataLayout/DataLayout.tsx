@@ -11,22 +11,24 @@ const DataLayout: FC = () => {
   const [gifs, setGifs] = useState<IGif[]>([]);
   const [loading, setLoading] = useState(true);
   const props = useParams();
-  const query = useOutletContext<string>();
+  const [query, limit] = useOutletContext<string>();
 
   useEffect(() => {
     setLoading(true);
     query
-      ? getGifsByQuery(query, Number(props.page), 20).then((res: IResponse) => {
-          console.log(res);
-          setGifs(res.data);
-          setLoading(false);
-        })
-      : getAllGifs(Number(props.page), 20).then((res: IResponse) => {
+      ? getGifsByQuery(query, Number(props.page), Number(limit)).then(
+          (res: IResponse) => {
+            console.log(res);
+            setGifs(res.data);
+            setLoading(false);
+          }
+        )
+      : getAllGifs(Number(props.page), Number(limit)).then((res: IResponse) => {
           console.log(res);
           setGifs(res.data);
           setLoading(false);
         });
-  }, [props.page, query]);
+  }, [props.page, query, limit]);
 
   return (
     <div className="data__wrap">
