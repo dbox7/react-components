@@ -5,7 +5,7 @@ import './Header.css';
 
 interface IHeader {
   setQuery: (value: string) => void;
-  setLimit: (value: string) => void;
+  setLimit: (value: number) => void;
 }
 
 const Header: FC<IHeader> = ({ setQuery, setLimit }) => {
@@ -17,13 +17,13 @@ const Header: FC<IHeader> = ({ setQuery, setLimit }) => {
         <span>Gifs per page:</span>
         <select
           className="header__select"
-          onChange={(e) => setLimit(e.target.value)}
+          onChange={(e) => setLimit(Number(e.target.value))}
         >
-          <option value="10">10</option>
-          <option value="25" selected>
+          <option value={10}>10</option>
+          <option value={25} selected>
             25
           </option>
-          <option value="50">50</option>
+          <option value={50}>50</option>
         </select>
       </div>
       <div className="header__logo">

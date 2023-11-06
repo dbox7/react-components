@@ -1,6 +1,6 @@
 const BASE_URL = 'https://api.giphy.com/v1/gifs';
 const API_KEY = 'api_key=bCTu4TIIVb1WkVvZTa6KsDy381RPl2Xj';
-const BASE_LIMIT = 20;
+export const BASE_LIMIT = 25;
 const BASE_OFFSET = 0;
 
 const addApiKey = (url: string): string => {
