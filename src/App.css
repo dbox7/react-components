@@ -1,0 +1,18 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #020201;
+}
+
+.not-found {
+  margin: 40px;
+  font-size: 32px;
+  color: #d1d94d;
+}

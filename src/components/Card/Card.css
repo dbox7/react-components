@@ -1,0 +1,40 @@
+.card {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 30%;
+  min-width: 250px;
+  border-radius: 15px;
+}
+
+.card:hover {
+  outline: 2px solid #d1d94d;
+}
+
+.card__img {
+  max-width: 50%;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #d1d94d;
+}
+
+.card__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+  min-width: 40%;
+  font-size: 0.9em;
+  color: #90c854;
+}
+
+.card__name {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #72c6d6;
+}
+
+.card__description {
+  width: 100%;
+}
