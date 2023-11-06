@@ -10,7 +10,11 @@ interface ICard {
 
 const Card: FC<ICard> = ({ item }) => {
   return (
-    <NavLink to={`details/${item.id}`} className="card">
+    <NavLink
+      to={`details/${item.id}`}
+      className="card"
+      onClick={(e) => e.stopPropagation()}
+    >
       <img src={item.images.preview_gif.url} alt="" className="card__img" />
     </NavLink>
   );

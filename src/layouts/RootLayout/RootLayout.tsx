@@ -16,10 +16,10 @@ const RootLayout: FC = () => {
   }, [query, limit]);
 
   return (
-    <>
+    <div onClick={() => navigate('page/1')}>
       <Header setQuery={setQuery} setLimit={setLimit} />
       <Outlet context={[query, limit]} />
-    </>
+    </div>
   );
 };
 

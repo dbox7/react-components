@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { IGif } from '../../types';
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 
 import Card from '../Card/Card';
 
@@ -13,6 +13,12 @@ interface IList {
 const List: FC<IList> = ({ queue }) => {
   const navigate = useNavigate();
   const props = useParams();
+
+  const changePage = (e: MouseEvent, offset: number) => {
+    e.stopPropagation();
+    navigate(`/page/${Number(props.page!) + offset}`);
+  };
+
   return (
     <div className="list__wrap">
       <div className={props.id == null ? 'list' : 'list list_detailed'}>
@@ -22,14 +28,11 @@ const List: FC<IList> = ({ queue }) => {
       </div>
       <div className="pagination">
         <div
-          onClick={() => navigate(`/page/${Number(props.page!) - 1}`)}
+          onClick={(e) => changePage(e, -1)}
           className="pagination_btn left"
         />
         <span>{props.page}</span>
-        <div
-          onClick={() => navigate(`/page/${Number(props.page!) + 1}`)}
-          className="pagination_btn"
-        />
+        <div onClick={(e) => changePage(e, 1)} className="pagination_btn" />
       </div>
     </div>
   );

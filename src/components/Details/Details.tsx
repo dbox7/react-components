@@ -35,7 +35,7 @@ const Details: FC = () => {
   }, [gif]);
 
   return (
-    <div className="details">
+    <div className="details" onClick={(e) => e.stopPropagation()}>
       {loading ? (
         <img src={loader} alt="" />
       ) : (

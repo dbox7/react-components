@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import logo from '../../assets/logo.gif';
 
 import './Header.css';
+import { NavLink } from 'react-router-dom';
 
 interface IHeader {
   setQuery: (value: string) => void;
@@ -26,10 +27,10 @@ const Header: FC<IHeader> = ({ setQuery, setLimit }) => {
           <option value={50}>50</option>
         </select>
       </div>
-      <div className="header__logo">
+      <NavLink to={'page/1'} className="header__logo">
         <img src={logo} className="header__logo-img" />
         <span className="header__logo-text">/mirror/</span>
-      </div>
+      </NavLink>
       <div className="header__search-wrap">
         <span className="header__desc">Let&#39;s find funny gifs!</span>
         <div className="header__search">

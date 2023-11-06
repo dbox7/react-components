@@ -18,13 +18,11 @@ const DataLayout: FC = () => {
     query
       ? getGifsByQuery(query, Number(props.page), Number(limit)).then(
           (res: IResponse) => {
-            console.log(res);
             setGifs(res.data);
             setLoading(false);
           }
         )
       : getAllGifs(Number(props.page), Number(limit)).then((res: IResponse) => {
-          console.log(res);
           setGifs(res.data);
           setLoading(false);
         });
