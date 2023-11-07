@@ -19,6 +19,7 @@ const Header: FC<IHeader> = ({ setQuery, setLimit }) => {
         <select
           className="header__select"
           onChange={(e) => setLimit(Number(e.target.value))}
+          onClick={(e) => e.stopPropagation()}
         >
           <option value={10}>10</option>
           <option value={25} selected>
@@ -27,7 +28,11 @@ const Header: FC<IHeader> = ({ setQuery, setLimit }) => {
           <option value={50}>50</option>
         </select>
       </div>
-      <NavLink to={'page/1'} className="header__logo">
+      <NavLink
+        to={'page/1'}
+        className="header__logo"
+        onClick={(e) => e.stopPropagation()}
+      >
         <img src={logo} className="header__logo-img" />
         <span className="header__logo-text">/mirror/</span>
       </NavLink>

@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
 import { BASE_LIMIT } from '../../api';
 
@@ -8,6 +8,7 @@ import './RootLayouts.css';
 
 const RootLayout: FC = () => {
   const navigate = useNavigate();
+  const params = useParams();
   const [query, setQuery] = useState('');
   const [limit, setLimit] = useState(BASE_LIMIT);
 
@@ -16,7 +17,7 @@ const RootLayout: FC = () => {
   }, [query, limit]);
 
   return (
-    <div onClick={() => navigate('page/1')}>
+    <div onClick={() => navigate(`page/${params.page}`)}>
       <Header setQuery={setQuery} setLimit={setLimit} />
       <Outlet context={[query, limit]} />
     </div>
