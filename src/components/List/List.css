@@ -1,10 +1,10 @@
 .list__wrap {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   gap: 30px;
   flex: 2;
+  max-width: 1200px;
 }
 
 .list {

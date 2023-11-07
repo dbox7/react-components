@@ -16,7 +16,8 @@ const List: FC<IList> = ({ queue }) => {
 
   const changePage = (e: MouseEvent, offset: number) => {
     e.stopPropagation();
-    navigate(`/page/${Number(props.page!) + offset}`);
+    const newPage = Number(props.page!) + offset;
+    if (newPage > 1) navigate(`/page/${Number(props.page!) + offset}`);
   };
 
   return (
