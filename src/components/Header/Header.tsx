@@ -1,16 +1,14 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { MyContext } from '../../context';
+
 import logo from '../../assets/logo.gif';
 
 import './Header.css';
-import { NavLink } from 'react-router-dom';
 
-interface IHeader {
-  setQuery: (value: string) => void;
-  setLimit: (value: number) => void;
-}
-
-const Header: FC<IHeader> = ({ setQuery, setLimit }) => {
-  const [inputValue, setInputValue] = useState('');
+const Header: FC = () => {
+  const context = useContext(MyContext);
+  const [inputValue, setInputValue] = useState(context!.query);
 
   return (
     <header className="header">
@@ -18,7 +16,7 @@ const Header: FC<IHeader> = ({ setQuery, setLimit }) => {
         <span>Gifs per page:</span>
         <select
           className="header__select"
-          onChange={(e) => setLimit(Number(e.target.value))}
+          onChange={(e) => context?.setLimit(Number(e.target.value))}
           onClick={(e) => e.stopPropagation()}
         >
           <option value={10}>10</option>
@@ -48,7 +46,7 @@ const Header: FC<IHeader> = ({ setQuery, setLimit }) => {
           />
           <button
             className="button header__button"
-            onClick={() => setQuery(inputValue)}
+            onClick={() => context?.setQuery(inputValue)}
           >
             Search
           </button>

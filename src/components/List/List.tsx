@@ -1,17 +1,15 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { IGif } from '../../types';
-import { FC, MouseEvent } from 'react';
+import { FC, MouseEvent, useContext } from 'react';
+import { MyContext } from '../../context';
 
 import Card from '../Card/Card';
 
 import './List.css';
 
-interface IList {
-  queue: IGif[];
-}
-
-const List: FC<IList> = ({ queue }) => {
+const List: FC = () => {
   const navigate = useNavigate();
+  const context = useContext(MyContext);
   const props = useParams();
 
   const changePage = (e: MouseEvent, offset: number) => {
@@ -23,7 +21,7 @@ const List: FC<IList> = ({ queue }) => {
   return (
     <div className="list__wrap">
       <div className={props.id == null ? 'list' : 'list list_detailed'}>
-        {queue.map((item: IGif, idx: number) => (
+        {context!.gifs.map((item: IGif, idx: number) => (
           <Card key={idx} item={item} />
         ))}
       </div>

@@ -59,7 +59,7 @@ const Details: FC = () => {
               <b>source: </b>
               {gif?.source ? (
                 <a href={gif?.source} target="_blank" rel="noreferrer">
-                  {gif?.source_tld || 'unknown'}
+                  {gif.source_tld || 'unknown'}
                 </a>
               ) : (
                 'unknown'
