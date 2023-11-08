@@ -21,4 +21,3 @@ export default {
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/', 'dist', 'build'],
 };
-// '<rootDir>/src/test/__ mocks __/fileMock.ts' '<rootDir>/src/fileTransformer.js'
