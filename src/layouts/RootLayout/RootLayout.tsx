@@ -2,7 +2,7 @@ import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { FC, useContext, useEffect, useState } from 'react';
 import { getAllGifs, getGifsByQuery } from '../../api';
 import { IResponse } from '../../types';
-import { MyContext } from '../../context';
+import { MyContext } from '../../components/ContextProvider/Context';
 
 import List from '../../components/List/List';
 import Header from '../../components/Header/Header';

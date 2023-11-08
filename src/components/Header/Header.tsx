@@ -1,6 +1,6 @@
 import { FC, useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { MyContext } from '../../context';
+import { MyContext } from '../ContextProvider/Context';
 
 import logo from '../../assets/logo.gif';
 

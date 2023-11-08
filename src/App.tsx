@@ -1,7 +1,7 @@
 import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
 import { FC } from 'react';
-import ContextProvider from './context';
 
+import ContextProvider from './components/ContextProvider/Context';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import Details from './components/Details/Details';
 import RootLayout from './layouts/RootLayout/RootLayout';

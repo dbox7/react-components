@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { IGif } from '../../types';
 import { FC, MouseEvent, useContext } from 'react';
-import { MyContext } from '../../context';
+import { MyContext } from '../ContextProvider/Context';
 
 import Card from '../Card/Card';
 
