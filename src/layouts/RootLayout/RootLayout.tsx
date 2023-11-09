@@ -37,7 +37,7 @@ const RootLayout: FC = () => {
   }, [params.page, context.query, context.limit]);
 
   return (
-    <div onClick={() => navigate(`page/${params.page}`)}>
+    <div onClick={() => navigate(`/page/${Number(params.page!)}`)}>
       <Header />
       <div className="data__wrap">
         {loading ? <img src={loader} alt="" /> : <List />}
@@ -46,5 +46,4 @@ const RootLayout: FC = () => {
     </div>
   );
 };
-
 export default RootLayout;

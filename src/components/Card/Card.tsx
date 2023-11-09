@@ -15,7 +15,7 @@ const Card: FC<ICard> = ({ item }) => {
       className="card"
       onClick={(e) => e.stopPropagation()}
     >
-      <img src={item.images.preview_gif.url} alt="" className="card__img" />
+      <img src={item.images.preview_gif.url} alt="card" className="card__img" />
     </NavLink>
   );
 };
