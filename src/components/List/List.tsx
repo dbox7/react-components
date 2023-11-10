@@ -21,9 +21,13 @@ const List: FC = () => {
   return (
     <div className="list__wrap">
       <div className={props.id == null ? 'list' : 'list list_detailed'}>
-        {context!.gifs.map((item: IGif, idx: number) => (
-          <Card key={idx} item={item} />
-        ))}
+        {context.gifs.length > 0 ? (
+          context!.gifs.map((item: IGif, idx: number) => (
+            <Card key={idx} item={item} />
+          ))
+        ) : (
+          <span>No items</span>
+        )}
       </div>
       <div className="pagination">
         <div
