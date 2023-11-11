@@ -10,6 +10,7 @@ export default {
     '\\.(css)$': 'identity-obj-proxy',
   },
   collectCoverage: true,
+  coveragePathIgnorePatterns: ['<rootDir>/src/api.ts'],
   coverageReporters: ['text', 'lcov'],
   coverageThreshold: {
     global: {

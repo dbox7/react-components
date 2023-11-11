@@ -40,7 +40,7 @@ const RootLayout: FC = () => {
     <div onClick={() => navigate(`/page/${Number(params.page!)}`)}>
       <Header />
       <div className="data__wrap">
-        {loading ? <img src={loader} alt="" /> : <List />}
+        {loading ? <img src={loader} alt="loader" /> : <List />}
         <Outlet />
       </div>
     </div>

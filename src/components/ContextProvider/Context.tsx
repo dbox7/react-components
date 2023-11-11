@@ -13,7 +13,7 @@ interface IContextProvider {
   children: ReactNode;
 }
 
-interface IContext {
+export interface IContext {
   query: string;
   setQuery: Dispatch<SetStateAction<string>>;
   gifs: IGif[];

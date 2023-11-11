@@ -5,18 +5,18 @@ import ContextProvider from '../../components/ContextProvider/Context';
 import { MyContext } from '../../components/ContextProvider/Context';
 import { IGif } from '../../types';
 
-test('Renders the list', () => {
-  render(
-    <BrowserRouter>
-      <ContextProvider>
-        <List />
-      </ContextProvider>
-    </BrowserRouter>
-  );
-  expect(true).toBeTruthy();
-});
+describe('List tests', () => {
+  test('Renders the list', () => {
+    const list = render(
+      <BrowserRouter>
+        <ContextProvider>
+          <List />
+        </ContextProvider>
+      </BrowserRouter>
+    );
+    expect(list).toBeTruthy();
+  });
 
-test('Check context', () => {
   const gif: IGif[] = [
     {
       analytics: {
@@ -70,7 +70,7 @@ test('Check context', () => {
     },
   ];
 
-  const value = {
+  let value = {
     query: '',
     setQuery: () => {},
     gifs: gif,
@@ -79,12 +79,35 @@ test('Check context', () => {
     setLimit: () => {},
   };
 
-  render(
-    <BrowserRouter>
-      <MyContext.Provider value={value}>
-        <List />
-      </MyContext.Provider>
-    </BrowserRouter>
-  );
-  expect(screen.getAllByAltText('card')).toHaveLength(1);
+  test('Check count of item in List', () => {
+    render(
+      <BrowserRouter>
+        <MyContext.Provider value={value}>
+          <List />
+        </MyContext.Provider>
+      </BrowserRouter>
+    );
+    screen.debug();
+    expect(screen.getAllByAltText('card')).toHaveLength(1);
+  });
+
+  test('No items in list', () => {
+    value = {
+      query: '',
+      setQuery: () => {},
+      gifs: [],
+      setGifs: () => {},
+      limit: 0,
+      setLimit: () => {},
+    };
+    render(
+      <BrowserRouter>
+        <MyContext.Provider value={value}>
+          <List />
+        </MyContext.Provider>
+      </BrowserRouter>
+    );
+    screen.debug();
+    expect(screen.getByText('No items')).toBeTruthy();
+  });
 });

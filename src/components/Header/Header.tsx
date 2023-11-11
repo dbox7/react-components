@@ -18,11 +18,10 @@ const Header: FC = () => {
           className="header__select"
           onChange={(e) => context?.setLimit(Number(e.target.value))}
           onClick={(e) => e.stopPropagation()}
+          defaultValue={25}
         >
           <option value={10}>10</option>
-          <option value={25} selected>
-            25
-          </option>
+          <option value={25}>25</option>
           <option value={50}>50</option>
         </select>
       </div>
