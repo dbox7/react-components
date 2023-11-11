@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import List from '../../components/List/List';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import ContextProvider from '../../components/ContextProvider/Context';
 import { MyContext } from '../../components/ContextProvider/Context';
 import { IGif } from '../../types';
@@ -87,7 +87,6 @@ describe('List tests', () => {
         </MyContext.Provider>
       </BrowserRouter>
     );
-    screen.debug();
     expect(screen.getAllByAltText('card')).toHaveLength(1);
   });
 
@@ -107,7 +106,33 @@ describe('List tests', () => {
         </MyContext.Provider>
       </BrowserRouter>
     );
-    screen.debug();
     expect(screen.getByText('No items')).toBeTruthy();
+  });
+
+  test('paggination test', async () => {
+    Object.defineProperty(window, 'location', {
+      value: new URL('http://localhost/page/1'),
+      writable: true,
+    });
+    jest.mock('react-router-dom', () => {
+      return {
+        useNavigate: jest.fn(),
+      };
+    });
+    render(
+      <BrowserRouter>
+        <ContextProvider>
+          <Routes>
+            <Route path="page/:page" element={<List />} />
+          </Routes>
+        </ContextProvider>
+      </BrowserRouter>
+    );
+
+    const paginationBtn = await screen.findByTestId('pagination_btn');
+    fireEvent.click(paginationBtn);
+    // const pageCounter = await screen.findByTestId('pageCounter');
+    // await waitFor(() => expect(useNavigate).toHaveBeenCalled());
+    // await waitFor(() => expect(useNavigate).toHaveBeenCalledWith('/page/2'));
   });
 });

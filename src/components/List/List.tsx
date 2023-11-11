@@ -34,8 +34,12 @@ const List: FC = () => {
           onClick={(e) => changePage(e, -1)}
           className="pagination_btn left"
         />
-        <span>{props.page}</span>
-        <div onClick={(e) => changePage(e, 1)} className="pagination_btn" />
+        <span data-testid="pageCounter">{props.page}</span>
+        <div
+          onClick={(e) => changePage(e, 1)}
+          className="pagination_btn"
+          data-testid="pagination_btn"
+        />
       </div>
     </div>
   );

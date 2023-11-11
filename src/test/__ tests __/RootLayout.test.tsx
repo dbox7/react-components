@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import RootLayout from '../../layouts/RootLayout/RootLayout';
 import { BrowserRouter } from 'react-router-dom';
 import { IGif } from '../../types';
@@ -176,7 +176,7 @@ jest.mock('../../api', () => {
 });
 
 describe('RootLayout tests', () => {
-  test('Render the RootLayout', () => {
+  test('Render the RootLayout', async () => {
     const root = render(
       <BrowserRouter>
         <ContextProvider>
