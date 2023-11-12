@@ -1,4 +1,4 @@
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import RootLayout from '../../layouts/RootLayout/RootLayout';
 import { BrowserRouter } from 'react-router-dom';
 import { IGif } from '../../types';
@@ -177,31 +177,27 @@ jest.mock('../../api', () => {
 
 describe('RootLayout tests', () => {
   test('Render RootLayout', async () => {
-    const root = act(() => {
-      render(
-        <BrowserRouter>
-          <ContextProvider>
-            <RootLayout />
-          </ContextProvider>
-        </BrowserRouter>
-      );
-    });
+    const root = render(
+      <BrowserRouter>
+        <ContextProvider>
+          <RootLayout />
+        </ContextProvider>
+      </BrowserRouter>
+    );
 
     expect(root).toBeTruthy();
   });
 
   test('Show loader', async () => {
-    act(() => {
-      render(
-        <BrowserRouter>
-          <ContextProvider>
-            <RootLayout />
-          </ContextProvider>
-        </BrowserRouter>
-      );
-    });
+    render(
+      <BrowserRouter>
+        <ContextProvider>
+          <RootLayout />
+        </ContextProvider>
+      </BrowserRouter>
+    );
 
-    const loader = screen.findByAltText('loader');
+    const loader = screen.getByAltText('loader');
     expect(loader).toBeTruthy();
 
     const list = await screen.findAllByAltText('card');
@@ -220,15 +216,13 @@ describe('RootLayout tests', () => {
       setLimit: () => {},
     };
 
-    act(() => {
-      render(
-        <BrowserRouter>
-          <MyContext.Provider value={value}>
-            <RootLayout />
-          </MyContext.Provider>
-        </BrowserRouter>
-      );
-    });
+    render(
+      <BrowserRouter>
+        <MyContext.Provider value={value}>
+          <RootLayout />
+        </MyContext.Provider>
+      </BrowserRouter>
+    );
 
     const list = await screen.findAllByAltText('card');
     expect(list.length).toBe(2);
