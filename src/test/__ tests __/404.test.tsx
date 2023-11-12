@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Routes, Route, Navigate } from 'react-router-dom';
+
 import NotFound from '../../components/404/404';
 
 describe('Not found tests', () => {

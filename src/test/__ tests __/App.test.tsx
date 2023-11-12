@@ -1,4 +1,6 @@
 import { render } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
+
 import App from '../../App';
 
 jest.mock('../../api', () => {
@@ -169,8 +171,10 @@ jest.mock('../../api', () => {
 });
 
 describe('App tests', () => {
-  test('Render App', () => {
-    const app = render(<App />);
+  test('Render App', async () => {
+    const app = await act(async () => {
+      return render(<App />);
+    });
     expect(app).toBeTruthy();
   });
 });

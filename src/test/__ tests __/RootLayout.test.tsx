@@ -1,12 +1,14 @@
 import { render, screen } from '@testing-library/react';
-import RootLayout from '../../layouts/RootLayout/RootLayout';
-import { BrowserRouter } from 'react-router-dom';
 import { IGif } from '../../types';
 import ContextProvider, {
   IContext,
   MyContext,
 } from '../../components/ContextProvider/Context';
 import { Dispatch, SetStateAction } from 'react';
+import { act } from 'react-dom/test-utils';
+
+import { BrowserRouter } from 'react-router-dom';
+import RootLayout from '../../layouts/RootLayout/RootLayout';
 
 jest.mock('../../api', () => {
   return {
@@ -177,13 +179,15 @@ jest.mock('../../api', () => {
 
 describe('RootLayout tests', () => {
   test('Render RootLayout', async () => {
-    const root = render(
-      <BrowserRouter>
-        <ContextProvider>
-          <RootLayout />
-        </ContextProvider>
-      </BrowserRouter>
-    );
+    const root = await act(async () => {
+      return render(
+        <BrowserRouter>
+          <ContextProvider>
+            <RootLayout />
+          </ContextProvider>
+        </BrowserRouter>
+      );
+    });
 
     expect(root).toBeTruthy();
   });

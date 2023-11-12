@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import List from '../../components/List/List';
 import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
-import ContextProvider from '../../components/ContextProvider/Context';
 import { MyContext } from '../../components/ContextProvider/Context';
 import { IGif } from '../../types';
 import userEvent from '@testing-library/user-event';
+
+import ContextProvider from '../../components/ContextProvider/Context';
+import List from '../../components/List/List';
 
 describe('List tests', () => {
   test('Renders the list', () => {

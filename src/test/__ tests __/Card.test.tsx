@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import Card from '../../components/Card/Card';
 import {
   BrowserRouter,
   MemoryRouter,
@@ -8,9 +7,11 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
+import { getGifById } from '../../api';
+
 import Details from '../../components/Details/Details';
 import ContextProvider from '../../components/ContextProvider/Context';
-import { getGifById } from '../../api';
+import Card from '../../components/Card/Card';
 
 jest.mock('../../api', () => {
   return {

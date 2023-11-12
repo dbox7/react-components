@@ -1,7 +1,9 @@
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
-import Details from '../../components/Details/Details';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
+
+import Details from '../../components/Details/Details';
 
 jest.mock('../../api', () => {
   return {
@@ -69,13 +71,15 @@ jest.mock('../../api', () => {
 
 describe('Details tests', () => {
   test('Render Details', async () => {
-    const details = render(
-      <MemoryRouter initialEntries={['/details/123']}>
-        <Routes>
-          <Route path="/details/:id" element={<Details />} />
-        </Routes>
-      </MemoryRouter>
-    );
+    const details = await act(async () => {
+      return render(
+        <MemoryRouter initialEntries={['/details/123']}>
+          <Routes>
+            <Route path="/details/:id" element={<Details />} />
+          </Routes>
+        </MemoryRouter>
+      );
+    });
     expect(details).toBeTruthy();
     const gifBlock = await screen.findByAltText('gif');
     expect(gifBlock).toBeTruthy();
@@ -105,28 +109,36 @@ describe('Details tests', () => {
     expect(ratingBlock).toBeTruthy();
   });
 
-  test('Show loader', () => {
-    render(
-      <MemoryRouter initialEntries={['/details/123']}>
-        <Routes>
-          <Route path="/details/:id" element={<Details />} />
-        </Routes>
-      </MemoryRouter>
-    );
-    expect(screen.getByAltText('loader')).toBeTruthy();
+  test('Show loader', async () => {
+    act(() => {
+      render(
+        <MemoryRouter initialEntries={['/details/123']}>
+          <Routes>
+            <Route path="/details/:id" element={<Details />} />
+          </Routes>
+        </MemoryRouter>
+      );
+    });
+    await waitFor(() => {
+      expect(screen.getByAltText('loader')).toBeTruthy();
+    });
   });
 
   test('Closing by button', async () => {
-    render(
-      <MemoryRouter initialEntries={['/page/1/details/123']}>
-        <Routes>
-          <Route path="page/:page" element={<div />} />
-          <Route path="page/:page/details/:id" element={<Details />} />
-        </Routes>
-      </MemoryRouter>
-    );
+    await act(async () => {
+      return render(
+        <MemoryRouter initialEntries={['/page/1/details/123']}>
+          <Routes>
+            <Route path="page/:page" element={<div />} />
+            <Route path="page/:page/details/:id" element={<Details />} />
+          </Routes>
+        </MemoryRouter>
+      );
+    });
     const closeBtn = await screen.findByText('X');
-    await userEvent.click(closeBtn);
+    await act(async () => {
+      await userEvent.click(closeBtn);
+    });
     expect(screen.queryByTestId('details')).toBeNull();
   });
 });

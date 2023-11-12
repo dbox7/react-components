@@ -1,8 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import Header from '../../components/Header/Header';
 import ContextProvider from '../../components/ContextProvider/Context';
 import { BrowserRouter } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
 
 describe('Header tests', () => {
   test('render Header', () => {
