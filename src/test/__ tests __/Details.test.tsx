@@ -116,11 +116,12 @@ describe('Details tests', () => {
     expect(screen.getByAltText('loader')).toBeTruthy();
   });
 
-  test('Show loader', async () => {
+  test('Closing by button', async () => {
     render(
-      <MemoryRouter initialEntries={['/details/123']}>
+      <MemoryRouter initialEntries={['/page/1/details/123']}>
         <Routes>
-          <Route path="/details/:id" element={<Details />} />
+          <Route path="page/:page" element={<div />} />
+          <Route path="page/:page/details/:id" element={<Details />} />
         </Routes>
       </MemoryRouter>
     );

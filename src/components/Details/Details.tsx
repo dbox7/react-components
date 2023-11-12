@@ -16,9 +16,7 @@ const Details: FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    // console.log(props.id);
     getGifById(props.id!).then((res: IResponse) => {
-      // console.log(res);
       setGif(res.data);
       setLoading(false);
     });
@@ -28,7 +26,6 @@ const Details: FC = () => {
     const width = Number(gif?.images.downsized.width);
     const height = Number(gif?.images.downsized.height);
     const ratio = width / height;
-    // console.log(width, height, ratio, gif);
     if (ratio > 1.25) setOrientation('horizontal');
     else if (ratio < 0.8) setOrientation('vertical');
     else setOrientation('quater');

@@ -5,6 +5,7 @@ import ContextProvider from './components/ContextProvider/Context';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import Details from './components/Details/Details';
 import RootLayout from './layouts/RootLayout/RootLayout';
+import NotFound from './components/404/404';
 
 import './App.css';
 
@@ -17,7 +18,8 @@ const App: FC = () => {
             <Route path="page/:page" element={<RootLayout />}>
               <Route path="details/:id" element={<Details />} />
             </Route>
-            <Route path="*" element={<Navigate to="page/1" />}></Route>
+            <Route path="/" element={<Navigate to="page/1" />}></Route>
+            <Route path="*" element={<NotFound />}></Route>
           </Routes>
         </BrowserRouter>
       </ContextProvider>

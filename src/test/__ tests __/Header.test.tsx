@@ -57,6 +57,5 @@ describe('Header tests', () => {
     const select = await screen.findByDisplayValue('25');
     fireEvent.change(select, { target: { value: '10' } });
     await userEvent.click(select);
-    screen.debug();
   });
 });
