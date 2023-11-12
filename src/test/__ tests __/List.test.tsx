@@ -1,9 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import List from '../../components/List/List';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
 import ContextProvider from '../../components/ContextProvider/Context';
 import { MyContext } from '../../components/ContextProvider/Context';
 import { IGif } from '../../types';
+import userEvent from '@testing-library/user-event';
 
 describe('List tests', () => {
   test('Renders the list', () => {
@@ -109,30 +110,29 @@ describe('List tests', () => {
     expect(screen.getByText('No items')).toBeTruthy();
   });
 
-  test('paggination test', async () => {
-    Object.defineProperty(window, 'location', {
-      value: new URL('http://localhost/page/1'),
-      writable: true,
-    });
-    jest.mock('react-router-dom', () => {
-      return {
-        useNavigate: jest.fn(),
-      };
-    });
+  test('Paggination test', async () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter initialEntries={['/page/1']}>
         <ContextProvider>
           <Routes>
             <Route path="page/:page" element={<List />} />
           </Routes>
         </ContextProvider>
-      </BrowserRouter>
+      </MemoryRouter>
     );
 
-    const paginationBtn = await screen.findByTestId('pagination_btn');
-    fireEvent.click(paginationBtn);
-    // const pageCounter = await screen.findByTestId('pageCounter');
-    // await waitFor(() => expect(useNavigate).toHaveBeenCalled());
-    // await waitFor(() => expect(useNavigate).toHaveBeenCalledWith('/page/2'));
+    const paginationIncrement = await screen.findByTestId(
+      'paginationIncrement'
+    );
+    await userEvent.click(paginationIncrement);
+    let pageCounter = await screen.findByTestId('pageCounter');
+    expect(pageCounter.innerHTML).toContain('2');
+
+    const paginationDecrement = await screen.findByTestId(
+      'paginationDecrement'
+    );
+    await userEvent.click(paginationDecrement);
+    pageCounter = await screen.findByTestId('pageCounter');
+    expect(pageCounter.innerHTML).toContain('1');
   });
 });

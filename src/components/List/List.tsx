@@ -15,7 +15,7 @@ const List: FC = () => {
   const changePage = (e: MouseEvent, offset: number) => {
     e.stopPropagation();
     const newPage = Number(props.page!) + offset;
-    if (newPage > 1) navigate(`/page/${Number(props.page!) + offset}`);
+    if (newPage >= 1) navigate(`/page/${newPage}`);
   };
 
   return (
@@ -33,12 +33,13 @@ const List: FC = () => {
         <div
           onClick={(e) => changePage(e, -1)}
           className="pagination_btn left"
+          data-testid="paginationDecrement"
         />
         <span data-testid="pageCounter">{props.page}</span>
         <div
           onClick={(e) => changePage(e, 1)}
           className="pagination_btn"
-          data-testid="pagination_btn"
+          data-testid="paginationIncrement"
         />
       </div>
     </div>

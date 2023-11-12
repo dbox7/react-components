@@ -176,7 +176,7 @@ jest.mock('../../api', () => {
 });
 
 describe('RootLayout tests', () => {
-  test('Render the RootLayout', async () => {
+  test('Render RootLayout', async () => {
     const root = act(() => {
       render(
         <BrowserRouter>
