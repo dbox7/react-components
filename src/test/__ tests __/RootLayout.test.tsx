@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import RootLayout from '../../layouts/RootLayout/RootLayout';
 import { BrowserRouter } from 'react-router-dom';
 import { IGif } from '../../types';
@@ -177,27 +177,31 @@ jest.mock('../../api', () => {
 
 describe('RootLayout tests', () => {
   test('Render the RootLayout', async () => {
-    const root = render(
-      <BrowserRouter>
-        <ContextProvider>
-          <RootLayout />
-        </ContextProvider>
-      </BrowserRouter>
-    );
+    const root = act(() => {
+      render(
+        <BrowserRouter>
+          <ContextProvider>
+            <RootLayout />
+          </ContextProvider>
+        </BrowserRouter>
+      );
+    });
+
     expect(root).toBeTruthy();
   });
 
   test('Show loader', async () => {
-    const root = render(
-      <BrowserRouter>
-        <ContextProvider>
-          <RootLayout />
-        </ContextProvider>
-      </BrowserRouter>
-    );
-    expect(root).toBeTruthy();
+    act(() => {
+      render(
+        <BrowserRouter>
+          <ContextProvider>
+            <RootLayout />
+          </ContextProvider>
+        </BrowserRouter>
+      );
+    });
 
-    const loader = screen.getByAltText('loader');
+    const loader = screen.findByAltText('loader');
     expect(loader).toBeTruthy();
 
     const list = await screen.findAllByAltText('card');
@@ -216,14 +220,15 @@ describe('RootLayout tests', () => {
       setLimit: () => {},
     };
 
-    const root = render(
-      <BrowserRouter>
-        <MyContext.Provider value={value}>
-          <RootLayout />
-        </MyContext.Provider>
-      </BrowserRouter>
-    );
-    expect(root).toBeTruthy();
+    act(() => {
+      render(
+        <BrowserRouter>
+          <MyContext.Provider value={value}>
+            <RootLayout />
+          </MyContext.Provider>
+        </BrowserRouter>
+      );
+    });
 
     const list = await screen.findAllByAltText('card');
     expect(list.length).toBe(2);

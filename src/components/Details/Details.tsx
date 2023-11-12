@@ -16,9 +16,9 @@ const Details: FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    console.log(props.id);
+    // console.log(props.id);
     getGifById(props.id!).then((res: IResponse) => {
-      console.log(res);
+      // console.log(res);
       setGif(res.data);
       setLoading(false);
     });
@@ -28,7 +28,7 @@ const Details: FC = () => {
     const width = Number(gif?.images.downsized.width);
     const height = Number(gif?.images.downsized.height);
     const ratio = width / height;
-    console.log(width, height, ratio, gif);
+    // console.log(width, height, ratio, gif);
     if (ratio > 1.25) setOrientation('horizontal');
     else if (ratio < 0.8) setOrientation('vertical');
     else setOrientation('quater');
@@ -37,7 +37,7 @@ const Details: FC = () => {
   return (
     <div className="details" onClick={(e) => e.stopPropagation()}>
       {loading ? (
-        <img src={loader} alt="" />
+        <img src={loader} alt="loader" />
       ) : (
         <div className={`details__info-wrap ${orientation}`}>
           <div

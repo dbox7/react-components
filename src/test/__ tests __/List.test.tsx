@@ -1,6 +1,6 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import List from '../../components/List/List';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ContextProvider from '../../components/ContextProvider/Context';
 import { MyContext } from '../../components/ContextProvider/Context';
 import { IGif } from '../../types';

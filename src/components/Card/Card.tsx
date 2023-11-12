@@ -14,6 +14,7 @@ const Card: FC<ICard> = ({ item }) => {
       to={`details/${item.id}`}
       className="card"
       onClick={(e) => e.stopPropagation()}
+      data-testid="card"
     >
       <img src={item.images.preview_gif.url} alt="card" className="card__img" />
     </NavLink>
