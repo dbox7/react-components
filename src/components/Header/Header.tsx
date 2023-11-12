@@ -10,6 +10,11 @@ const Header: FC = () => {
   const context = useContext(MyContext);
   const [inputValue, setInputValue] = useState(context!.query);
 
+  const handleClick = () => {
+    context?.setQuery(inputValue);
+    localStorage.setItem('search', inputValue);
+  };
+
   return (
     <header className="header">
       <div className="header__select-wrap">
@@ -43,10 +48,7 @@ const Header: FC = () => {
             className="header__input"
             placeholder="Enter your query here"
           />
-          <button
-            className="button header__button"
-            onClick={() => context?.setQuery(inputValue)}
-          >
+          <button className="button header__button" onClick={handleClick}>
             Search
           </button>
         </div>

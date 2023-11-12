@@ -32,7 +32,7 @@ export const MyContext = createContext<IContext>({
 });
 
 const ContextProvider: FC<IContextProvider> = ({ children }) => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(localStorage.getItem('search') || '');
   const [gifs, setGifs] = useState<IGif[]>([]);
   const [limit, setLimit] = useState(BASE_LIMIT);
 
