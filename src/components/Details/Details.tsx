@@ -35,7 +35,11 @@ const Details: FC = () => {
   }, [gif]);
 
   return (
-    <div className="details" onClick={(e) => e.stopPropagation()}>
+    <div
+      className="details"
+      onClick={(e) => e.stopPropagation()}
+      data-testid="details"
+    >
       {loading ? (
         <img src={loader} alt="loader" />
       ) : (
@@ -49,6 +53,7 @@ const Details: FC = () => {
           <img
             src={gif?.images.downsized.url}
             className={`details__img ${orientation}`}
+            alt="gif"
           />
           <div className="details__text-wrap">
             <div className="details__title">{gif?.title}</div>

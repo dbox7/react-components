@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import List from '../../components/List/List';
 import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
 import ContextProvider from '../../components/ContextProvider/Context';
