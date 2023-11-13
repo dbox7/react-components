@@ -1,0 +1,5 @@
+**/assets
+**/coverage
+
+.gitignore
+.prettierignore

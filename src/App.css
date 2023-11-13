@@ -1,0 +1,24 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #141214;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
+
+.not-found {
+  margin: 40px;
+  font-size: 32px;
+  color: #d1d94d;
+}
