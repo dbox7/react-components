@@ -7,7 +7,7 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import { getGifById } from '../../api';
+import { getGifById } from '../../utils/api';
 
 import Details from '../../components/Details/Details';
 import ContextProvider from '../../components/ContextProvider/Context';

@@ -1,7 +1,7 @@
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { FC, useContext, useEffect, useState } from 'react';
-import { getAllGifs, getGifsByQuery } from '../../api';
-import { IResponse } from '../../types';
+import { getAllGifs, getGifsByQuery } from '../../utils/api';
+import { IResponse } from '../../utils/types';
 import { MyContext } from '../../components/ContextProvider/Context';
 
 import List from '../../components/List/List';

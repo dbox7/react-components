@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
-import { getGifById } from '../../api';
-import { IGif, IResponse } from '../../types';
+import { getGifById } from '../../utils/api';
+import { IGif, IResponse } from '../../utils/types';
 
 import './Details.css';
 

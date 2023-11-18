@@ -6,8 +6,8 @@ import {
   createContext,
   useState,
 } from 'react';
-import { IGif } from '../../types';
-import { BASE_LIMIT } from '../../api';
+import { IGif } from '../../utils/types';
+import { BASE_LIMIT } from '../../utils/api';
 
 interface IContextProvider {
   children: ReactNode;

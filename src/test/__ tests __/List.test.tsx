@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
 import { MyContext } from '../../components/ContextProvider/Context';
-import { IGif } from '../../types';
+import { IGif } from '../../utils/types';
 import userEvent from '@testing-library/user-event';
 
 import ContextProvider from '../../components/ContextProvider/Context';
