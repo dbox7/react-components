@@ -31,7 +31,7 @@ const Header: FC = () => {
         </select>
       </div>
       <NavLink
-        to={'page/1'}
+        to={'/page/1'}
         className="header__logo"
         onClick={(e) => e.stopPropagation()}
       >
