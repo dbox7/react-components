@@ -12,7 +12,6 @@ export default {
   collectCoverage: true,
   coveragePathIgnorePatterns: [
     '<rootDir>/src/api.ts',
-    '<rootDir>/src/components/ErrorBoundary',
     '<rootDir>/src/test/__ mocks __',
   ],
   coverageReporters: ['text', 'lcov'],
