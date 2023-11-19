@@ -28,7 +28,7 @@ const Header: FC = () => {
           className="header__select"
           onChange={(e) => dispatch(saveLimit(Number(e.target.value)))}
           onClick={(e) => e.stopPropagation()}
-          defaultValue={limit}
+          value={limit}
         >
           <option value={10}>10</option>
           <option value={25}>25</option>

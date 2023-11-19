@@ -1,5 +1,5 @@
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useGetAllGifsQuery } from '../../utils/api';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/Store';
@@ -20,6 +20,8 @@ const RootLayout: FC = () => {
     limit,
     offset: Number(params.page),
   });
+
+  useEffect(() => navigate('/page/1'), [query]);
 
   return (
     <div onClick={() => navigate(`/page/${Number(params.page!)}`)}>

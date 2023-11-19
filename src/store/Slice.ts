@@ -7,7 +7,7 @@ interface IStoreState {
 }
 
 const initialState: IStoreState = {
-  query: '',
+  query: localStorage.getItem('search') || '',
   limit: 25,
 };
 

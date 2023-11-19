@@ -4,6 +4,19 @@ import { IGif } from './types';
 const BASE_URL = 'https://api.giphy.com/v1/gifs';
 const API_KEY = 'api_key=bCTu4TIIVb1WkVvZTa6KsDy381RPl2Xj';
 
+const urlConstructor = (
+  query: string,
+  limit: number,
+  offset: number
+): string => {
+  let res = BASE_URL;
+  if (query) res += `/search?q=${query}&`;
+  else res += `/trending?`;
+  res += `limit=${limit}&${API_KEY}`;
+  if (offset > 0) res += `&offset=${(offset - 1) * limit}`;
+  return res;
+};
+
 export const fetchData = createApi({
   reducerPath: 'fetchData',
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
@@ -13,17 +26,7 @@ export const fetchData = createApi({
       { query: string; limit: number; offset: number }
     >({
       query: ({ query, limit, offset }) => {
-        if (!query) {
-          if (offset > 0) {
-            return `/trending?limit=${limit}&offset=${
-              (offset - 1) * limit
-            }&${API_KEY}`;
-          } else {
-            return `/trending?limit=${limit}&${API_KEY}`;
-          }
-        } else {
-          return `/search?q=${query}&${API_KEY}`;
-        }
+        return urlConstructor(query, limit, offset);
       },
       transformResponse: (response: { data: IGif[] }) => response.data,
     }),
