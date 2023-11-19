@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IGif } from './types';
+import { IGif, IResponse } from './types';
 
 const BASE_URL = 'https://api.giphy.com/v1/gifs';
 const API_KEY = 'api_key=bCTu4TIIVb1WkVvZTa6KsDy381RPl2Xj';
@@ -78,11 +78,11 @@ export const fetchData = createApi({
       { query: string; limit: number; offset: number }
     >({
       query: ({ query, limit, offset }) => urlConstructor(query, limit, offset),
-      transformResponse: ({ response }) => response.data,
+      transformResponse: (response: IResponse) => response.data,
     }),
-    getGifById: builder.query<IGif, number>({
-      query: (id) => `/trending/${id}`,
-      transformResponse: ({ response }) => response.data,
+    getGifById: builder.query<IGif, string>({
+      query: (id) => `${BASE_URL}/${id}?${API_KEY}`,
+      transformResponse: (response: IResponse) => response.data,
     }),
   }),
 });
