@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { IGif } from '../../types';
+import { IGif } from '../../utils/types';
 import { FC, MouseEvent } from 'react';
 
 import Card from '../Card/Card';

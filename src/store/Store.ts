@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import storeSlice from './Slice';
-import { fetchData } from '../api';
+import { fetchData } from '../utils/api';
 
 const rootReducer = combineReducers({
   storeSlice,

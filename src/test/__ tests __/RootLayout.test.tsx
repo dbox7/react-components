@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { IGif } from '../../types';
+import { IGif } from '../../utils/types';
 import ContextProvider, {
   IContext,
   MyContext,
