@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 import { IGif } from '../../utils/types';
-import { BASE_LIMIT } from '../../store/api';
+import { BASE_LIMIT } from '../../store/utils/api';
 
 interface IContextProvider {
   children: ReactNode;

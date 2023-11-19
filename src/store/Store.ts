@@ -4,7 +4,7 @@ import {
   configureStore,
 } from '@reduxjs/toolkit';
 import storeSlice from './Slice';
-import { fetchData } from './api';
+import { fetchData } from './Fetch';
 
 const rootReducer = combineReducers({
   storeSlice,
@@ -19,6 +19,8 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
       getDefaultMiddleware().concat(fetchData.middleware),
   });
 };
+
+export const store = setupStore();
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;

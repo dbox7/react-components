@@ -1,6 +1,6 @@
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { FC, useEffect } from 'react';
-import { useGetAllGifsQuery } from '../../store/api';
+import { useGetAllGifsQuery } from '../../store/Fetch';
 
 import List from '../../components/List/List';
 import Header from '../../components/Header/Header';
