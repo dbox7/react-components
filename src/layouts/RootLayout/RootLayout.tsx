@@ -17,25 +17,6 @@ const RootLayout: FC = () => {
   const params = useParams();
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setLoading(true);
-    context.query
-      ? getGifsByQuery(
-          context.query,
-          Number(params.page),
-          Number(context!.limit)
-        ).then((res: IResponse) => {
-          context.setGifs(res.data);
-          setLoading(false);
-        })
-      : getAllGifs(Number(params.page), Number(context.limit)).then(
-          (res: IResponse) => {
-            context.setGifs(res.data);
-            setLoading(false);
-          }
-        );
-  }, [params.page, context.query, context.limit]);
-
   return (
     <div onClick={() => navigate(`/page/${Number(params.page!)}`)}>
       <Header />
