@@ -3,7 +3,6 @@ import { FC } from 'react';
 import { store } from './store/Store';
 
 import { Provider } from 'react-redux';
-// import ContextProvider from './components/ContextProvider/Context';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import Details from './components/Details/Details';
 import RootLayout from './layouts/RootLayout/RootLayout';

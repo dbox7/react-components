@@ -1,6 +1,8 @@
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { FC } from 'react';
 import { useGetAllGifsQuery } from '../../utils/api';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/Store';
 
 import List from '../../components/List/List';
 import Header from '../../components/Header/Header';
@@ -8,8 +10,6 @@ import Header from '../../components/Header/Header';
 import loader from '../../assets/loader.gif';
 
 import './RootLayouts.css';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/Store';
 
 const RootLayout: FC = () => {
   const navigate = useNavigate();

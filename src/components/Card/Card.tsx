@@ -1,6 +1,7 @@
-import { NavLink } from 'react-router-dom';
 import { FC } from 'react';
 import { IGif } from '../../utils/types';
+
+import { NavLink } from 'react-router-dom';
 
 import './Card.css';
 

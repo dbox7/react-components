@@ -1,17 +1,22 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/Store';
+import { useAppDispatch } from '../../store/Hooks';
+import { saveLimit, saveQuery } from '../../store/Slice';
+
 import { NavLink } from 'react-router-dom';
-import { MyContext } from '../ContextProvider/Context';
 
 import logo from '../../assets/logo.gif';
 
 import './Header.css';
 
 const Header: FC = () => {
-  const context = useContext(MyContext);
-  const [inputValue, setInputValue] = useState(context!.query);
+  const { query, limit } = useSelector((state: RootState) => state.storeSlice);
+  const dispatch = useAppDispatch();
+  const [inputValue, setInputValue] = useState(query);
 
   const handleClick = () => {
-    context?.setQuery(inputValue);
+    dispatch(saveQuery(inputValue));
     localStorage.setItem('search', inputValue);
   };
 
@@ -21,9 +26,9 @@ const Header: FC = () => {
         <span>Gifs per page:</span>
         <select
           className="header__select"
-          onChange={(e) => context?.setLimit(Number(e.target.value))}
+          onChange={(e) => dispatch(saveLimit(Number(e.target.value)))}
           onClick={(e) => e.stopPropagation()}
-          defaultValue={25}
+          defaultValue={limit}
         >
           <option value={10}>10</option>
           <option value={25}>25</option>
