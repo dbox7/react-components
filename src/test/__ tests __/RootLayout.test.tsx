@@ -9,8 +9,9 @@ import { act } from 'react-dom/test-utils';
 
 import { BrowserRouter } from 'react-router-dom';
 import RootLayout from '../../layouts/RootLayout/RootLayout';
+import { renderWithProviders } from '../../utils/testWrapper';
 
-jest.mock('../../api', () => {
+jest.mock('../../store/api', () => {
   return {
     getAllGifs: jest.fn(() =>
       Promise.resolve({
@@ -180,11 +181,9 @@ jest.mock('../../api', () => {
 describe('RootLayout tests', () => {
   test('Render RootLayout', async () => {
     const root = await act(async () => {
-      return render(
+      return renderWithProviders(
         <BrowserRouter>
-          <ContextProvider>
-            <RootLayout />
-          </ContextProvider>
+          <RootLayout />
         </BrowserRouter>
       );
     });

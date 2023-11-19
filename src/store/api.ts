@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IGif, IResponse } from './types';
+import { IGif, IResponse } from '../utils/types';
 
 const BASE_URL = 'https://api.giphy.com/v1/gifs';
 const API_KEY = 'api_key=bCTu4TIIVb1WkVvZTa6KsDy381RPl2Xj';
