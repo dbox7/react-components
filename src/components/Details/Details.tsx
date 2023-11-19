@@ -1,7 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
-import { getGifById } from '../../utils/api';
-import { IGif, IResponse } from '../../utils/types';
+import { useGetGifByIdQuery } from '../../utils/api';
 
 import './Details.css';
 
@@ -9,27 +8,18 @@ import loader from '../../assets/loader.gif';
 
 const Details: FC = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [orientation, setOrientation] = useState('quater');
-  const [gif, setGif] = useState<IGif>();
   const props = useParams();
+  const { data, isFetching } = useGetGifByIdQuery(props.id!);
+  const [orientation, setOrientation] = useState('quater');
 
   useEffect(() => {
-    setLoading(true);
-    getGifById(props.id!).then((res: IResponse) => {
-      setGif(res.data);
-      setLoading(false);
-    });
-  }, [props.id]);
-
-  useEffect(() => {
-    const width = Number(gif?.images.downsized.width);
-    const height = Number(gif?.images.downsized.height);
+    const width = Number(data?.images.downsized.width);
+    const height = Number(data?.images.downsized.height);
     const ratio = width / height;
     if (ratio > 1.25) setOrientation('horizontal');
     else if (ratio < 0.8) setOrientation('vertical');
     else setOrientation('quater');
-  }, [gif]);
+  }, [data]);
 
   return (
     <div
@@ -37,7 +27,7 @@ const Details: FC = () => {
       onClick={(e) => e.stopPropagation()}
       data-testid="details"
     >
-      {loading ? (
+      {isFetching ? (
         <img src={loader} alt="loader" />
       ) : (
         <div className={`details__info-wrap ${orientation}`}>
@@ -48,44 +38,47 @@ const Details: FC = () => {
             X
           </div>
           <img
-            src={gif?.images.downsized.url}
+            src={data?.images.downsized.url}
             className={`details__img ${orientation}`}
             alt="gif"
           />
           <div className="details__text-wrap">
-            <div className="details__title">{gif?.title}</div>
+            <div className="details__title">{data?.title}</div>
             <div className="details__posted">
-              <b>posted:</b> {gif?.import_datetime}
+              <b>posted:</b> {data?.import_datetime}
             </div>
             <div className="details__source">
               <b>source: </b>
-              {gif?.source ? (
-                <a href={gif?.source} target="_blank" rel="noreferrer">
-                  {gif.source_tld || 'unknown'}
+              {data?.source ? (
+                <a href={data?.source} target="_blank" rel="noreferrer">
+                  {data.source_tld || 'unknown'}
                 </a>
               ) : (
                 'unknown'
               )}
             </div>
-            {gif?.username && (
+            {data?.username && (
               <div className="details__user-wrap">
-                <img className="details__user-img" src={gif.user?.avatar_url} />
+                <img
+                  className="details__user-img"
+                  src={data.user?.avatar_url}
+                />
                 <div className="details__user-info">
                   <div className="details__user-name">
-                    {gif.user?.display_name}
+                    {data.user?.display_name}
                   </div>
                   <div className="details__user-desc">
-                    {gif.user?.description}
+                    {data.user?.description}
                   </div>
                   <div className="details__user-contacts">
                     <a
-                      href={gif.user?.website_url}
+                      href={data.user?.website_url}
                       className="details__user-website"
                     >
                       website
                     </a>
                     <a
-                      href={gif.user?.instagram_url}
+                      href={data.user?.instagram_url}
                       className="details__user-instagram"
                     >
                       instagram
@@ -97,7 +90,7 @@ const Details: FC = () => {
             <div className="details__rating">
               MPAA
               <br />
-              rating<span>{gif?.rating}</span>
+              rating<span>{data?.rating}</span>
             </div>
           </div>
         </div>

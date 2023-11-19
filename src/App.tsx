@@ -1,7 +1,9 @@
 import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
 import { FC } from 'react';
+import { store } from './store/Store';
 
-import ContextProvider from './components/ContextProvider/Context';
+import { Provider } from 'react-redux';
+// import ContextProvider from './components/ContextProvider/Context';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import Details from './components/Details/Details';
 import RootLayout from './layouts/RootLayout/RootLayout';
@@ -12,7 +14,7 @@ import './App.css';
 const App: FC = () => {
   return (
     <ErrorBoundary fallback="something wrong">
-      <ContextProvider>
+      <Provider store={store}>
         <BrowserRouter>
           <Routes>
             <Route path="page/:page" element={<RootLayout />}>
@@ -22,7 +24,7 @@ const App: FC = () => {
             <Route path="*" element={<NotFound />}></Route>
           </Routes>
         </BrowserRouter>
-      </ContextProvider>
+      </Provider>
     </ErrorBoundary>
   );
 };

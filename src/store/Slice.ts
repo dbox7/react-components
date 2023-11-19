@@ -12,7 +12,7 @@ const initialState: IStoreState = {
 };
 
 export const storeSlice = createSlice({
-  name: 'store',
+  name: 'storeSlice',
   initialState,
   reducers: {
     saveQuery: (state, action: PayloadAction<string>) => {
