@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
-import { useGetGifByIdQuery } from '../../utils/api';
+import { useGetGifByIdQuery } from '../../store/Fetch';
 
 import './Details.css';
 
@@ -8,9 +8,9 @@ import loader from '../../assets/loader.gif';
 
 const Details: FC = () => {
   const navigate = useNavigate();
+  const [orientation, setOrientation] = useState('quater');
   const props = useParams();
   const { data, isFetching } = useGetGifByIdQuery(props.id!);
-  const [orientation, setOrientation] = useState('quater');
 
   useEffect(() => {
     const width = Number(data?.images.downsized.width);

@@ -6,11 +6,11 @@ import Card from '../Card/Card';
 
 import './List.css';
 
-interface ListProps {
+interface listProps {
   data: IGif[] | undefined;
 }
 
-const List: FC<ListProps> = ({ data }) => {
+const List: FC<listProps> = ({ data }) => {
   const navigate = useNavigate();
   const props = useParams();
 

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.65% </span>
+                <span class="strong">94.73% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/23</span>
+                <span class='fraction'>18/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.65% </span>
+                <span class="strong">94.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>22/23</span>
+                <span class='fraction'>16/17</span>
             </div>
         
             
@@ -99,20 +99,10 @@
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a>
-<a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -121,34 +111,18 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -162,10 +136,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import { FC, useContext, useEffect, useState } from 'react';
-import { getAllGifs, getGifsByQuery } from '../../api';
-import { IResponse } from '../../types';
-import { MyContext } from '../../components/ContextProvider/Context';
+import { FC, useEffect } from 'react';
+import { useGetAllGifsQuery } from '../../store/Fetch';
 &nbsp;
 import List from '../../components/List/List';
 import Header from '../../components/Header/Header';
@@ -173,37 +145,26 @@ import Header from '../../components/Header/Header';
 import loader from '../../assets/loader.gif';
 &nbsp;
 import './RootLayouts.css';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/Store';
 &nbsp;
 const RootLayout: FC = () =&gt; {
-  const context = useContext(MyContext);
   const navigate = useNavigate();
   const params = useParams();
-  const [loading, setLoading] = useState(true);
+  const { query, limit } = useSelector((state: RootState) =&gt; state.storeSlice);
+  const { data, isFetching } = useGetAllGifsQuery({
+    query,
+    limit,
+    offset: Number(params.page),
+  });
 &nbsp;
-  useEffect(() =&gt; {
-    setLoading(true);
-    context.query
-      ? getGifsByQuery(
-          context.query,
-          Number(params.page),
-          Number(context!.limit)
-        ).then((res: IResponse) =&gt; {
-          context.setGifs(res.data);
-          setLoading(false);
-        })
-      : getAllGifs(Number(params.page), Number(context.limit)).then(
-          (res: IResponse) =&gt; {
-            context.setGifs(res.data);
-            setLoading(false);
-          }
-        );
-  }, [params.page, context.query, context.limit]);
+  useEffect(() =&gt; navigate('/page/1'), [query]);
 &nbsp;
   return (
     &lt;div onClick={<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >navigate(`/page/${Number(params.page!)}`)}</span>&gt;
       &lt;Header /&gt;
       &lt;div className="data__wrap"&gt;
-        {loading ? &lt;img src={loader} alt="loader" /&gt; : &lt;List /&gt;}
+        {isFetching ? &lt;img src={loader} alt="loader" /&gt; : &lt;List data={data} /&gt;}
         &lt;Outlet /&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -217,7 +178,11 @@ export default RootLayout;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+<<<<<<< HEAD
                 at 2023-11-15T14:56:33.239Z
+=======
+                at 2023-11-19T21:59:52.263Z
+>>>>>>> 7509038261f6e8195096ae2cb2c17d6aa60bdd85
             </div>
         <script src="../../../prettify.js"></script>
         <script>

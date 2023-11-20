@@ -1,7 +1,6 @@
 import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
 import { FC } from 'react';
 import { store } from './store/Store';
-
 import { Provider } from 'react-redux';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import Details from './components/Details/Details';

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/15</span>
+                <span class='fraction'>15/21</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/6</span>
+                <span class='fraction'>2/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/15</span>
+                <span class='fraction'>14/20</span>
             </div>
         
             
@@ -121,19 +121,34 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -168,9 +183,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,17 +191,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FC, useContext, useState } from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { MyContext } from '../ContextProvider/Context';
 &nbsp;
 import logo from '../../assets/logo.gif';
 &nbsp;
 import './Header.css';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../store/Hooks';
+import { RootState } from '../../store/Store';
+import { saveLimit, saveQuery } from '../../store/Slice';
 &nbsp;
 const Header: FC = () =&gt; {
-  const context = useContext(MyContext);
-  const [inputValue, setInputValue] = useState(context!.query);
+  const dispatch = useAppDispatch();
+  const { query, limit } = useSelector((state: RootState) =&gt; state.storeSlice);
+  const [inputValue, setInputValue] = useState(query);
+&nbsp;
+  const handleClick = <span class="fstat-no" title="function not covered" >() =</span>&gt; {
+<span class="cstat-no" title="statement not covered" >    dispatch(saveQuery(inputValue));</span>
+<span class="cstat-no" title="statement not covered" >    localStorage.setItem('search', inputValue);</span>
+  };
 &nbsp;
   return (
     &lt;header className="header"&gt;
@@ -197,9 +218,9 @@ const Header: FC = () =&gt; {
         &lt;span&gt;Gifs per page:&lt;/span&gt;
         &lt;select
           className="header__select"
-          onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >context?.setLimit(Number(e.target.value))}</span>
+          onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >dispatch(saveLimit(Number(e.target.value)))}</span>
           onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >e.stopPropagation()}</span>
-          defaultValue={25}
+          defaultValue={limit}
         &gt;
           &lt;option value={10}&gt;10&lt;/option&gt;
           &lt;option value={25}&gt;25&lt;/option&gt;
@@ -207,7 +228,7 @@ const Header: FC = () =&gt; {
         &lt;/select&gt;
       &lt;/div&gt;
       &lt;NavLink
-        to={'page/1'}
+        to={'/page/1'}
         className="header__logo"
         onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >e.stopPropagation()}</span>
       &gt;
@@ -224,10 +245,7 @@ const Header: FC = () =&gt; {
             className="header__input"
             placeholder="Enter your query here"
           /&gt;
-          &lt;button
-            className="button header__button"
-            onClick={<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >context?.setQuery(inputValue)}</span>
-          &gt;
+          &lt;button className="button header__button" onClick={handleClick}&gt;
             Search
           &lt;/button&gt;
         &lt;/div&gt;
@@ -244,7 +262,7 @@ export default Header;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-12T06:46:24.694Z
+                at 2023-11-19T21:52:04.677Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
