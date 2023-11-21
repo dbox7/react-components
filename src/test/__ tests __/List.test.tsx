@@ -1,10 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
-import { MyContext } from '../../components/ContextProvider/Context';
 import { IGif } from '../../utils/types';
 import userEvent from '@testing-library/user-event';
 
-import ContextProvider from '../../components/ContextProvider/Context';
 import List from '../../components/List/List';
 import { renderWithProviders } from '../../utils/testWrapper';
 
@@ -71,68 +69,45 @@ describe('List tests', () => {
     },
   ];
 
-  // let value = {
-  //   query: '',
-  //   setQuery: () => {},
-  //   gifs: gif,
-  //   setGifs: () => {},
-  //   limit: 0,
-  //   setLimit: () => {},
-  // };
+  test('Check count of item in List', () => {
+    renderWithProviders(
+      <BrowserRouter>
+        <List data={gif} />
+      </BrowserRouter>
+    );
+    expect(screen.getAllByAltText('card')).toHaveLength(1);
+  });
 
-  // test('Check count of item in List', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <MyContext.Provider value={value}>
-  //         <List />
-  //       </MyContext.Provider>
-  //     </BrowserRouter>
-  //   );
-  //   expect(screen.getAllByAltText('card')).toHaveLength(1);
-  // });
+  test('No items in list', () => {
+    renderWithProviders(
+      <BrowserRouter>
+        <List data={undefined} />
+      </BrowserRouter>
+    );
+    expect(screen.getByText('No items')).toBeTruthy();
+  });
 
-  // test('No items in list', () => {
-  //   value = {
-  //     query: '',
-  //     setQuery: () => {},
-  //     gifs: [],
-  //     setGifs: () => {},
-  //     limit: 0,
-  //     setLimit: () => {},
-  //   };
-  //   render(
-  //     <BrowserRouter>
-  //       <MyContext.Provider value={value}>
-  //         <List />
-  //       </MyContext.Provider>
-  //     </BrowserRouter>
-  //   );
-  //   expect(screen.getByText('No items')).toBeTruthy();
-  // });
+  test('Paggination test', async () => {
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/page/1']}>
+        <Routes>
+          <Route path="page/:page" element={<List data={gif} />} />
+        </Routes>
+      </MemoryRouter>
+    );
 
-  // test('Paggination test', async () => {
-  //   render(
-  //     <MemoryRouter initialEntries={['/page/1']}>
-  //       <ContextProvider>
-  //         <Routes>
-  //           <Route path="page/:page" element={<List />} />
-  //         </Routes>
-  //       </ContextProvider>
-  //     </MemoryRouter>
-  //   );
+    const paginationIncrement = await screen.findByTestId(
+      'paginationIncrement'
+    );
+    await userEvent.click(paginationIncrement);
+    let pageCounter = await screen.findByTestId('pageCounter');
+    expect(pageCounter.innerHTML).toContain('2');
 
-  //   const paginationIncrement = await screen.findByTestId(
-  //     'paginationIncrement'
-  //   );
-  //   await userEvent.click(paginationIncrement);
-  //   let pageCounter = await screen.findByTestId('pageCounter');
-  //   expect(pageCounter.innerHTML).toContain('2');
-
-  //   const paginationDecrement = await screen.findByTestId(
-  //     'paginationDecrement'
-  //   );
-  //   await userEvent.click(paginationDecrement);
-  //   pageCounter = await screen.findByTestId('pageCounter');
-  //   expect(pageCounter.innerHTML).toContain('1');
-  // });
+    const paginationDecrement = await screen.findByTestId(
+      'paginationDecrement'
+    );
+    await userEvent.click(paginationDecrement);
+    pageCounter = await screen.findByTestId('pageCounter');
+    expect(pageCounter.innerHTML).toContain('1');
+  });
 });

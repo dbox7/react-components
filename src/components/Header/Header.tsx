@@ -1,8 +1,7 @@
 import { FC, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../store/Store';
-import { useAppDispatch } from '../../store/Hooks';
-import { saveLimit, saveQuery } from '../../store/Slice';
+import { useAppDispatch, useAppSelector } from '../../store/utils/Hooks';
+import { saveLimit, saveQuery } from '../../store/utils/Slice';
 import { NavLink } from 'react-router-dom';
 
 import logo from '../../assets/logo.gif';
@@ -11,7 +10,9 @@ import './Header.css';
 
 const Header: FC = () => {
   const dispatch = useAppDispatch();
-  const { query, limit } = useSelector((state: RootState) => state.storeSlice);
+  const { query, limit } = useAppSelector(
+    (state: RootState) => state.storeSlice
+  );
   const [inputValue, setInputValue] = useState(query);
 
   const handleClick = () => {

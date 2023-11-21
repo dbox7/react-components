@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
-import { useGetGifByIdQuery } from '../../store/Fetch';
+import { useGetGifByIdQuery } from '../../utils/api';
 
 import './Details.css';
 

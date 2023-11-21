@@ -1,8 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Header from '../../components/Header/Header';
-import ContextProvider from '../../components/ContextProvider/Context';
 import { BrowserRouter } from 'react-router-dom';
 import { renderWithProviders } from '../../utils/testWrapper';
 
@@ -16,46 +15,46 @@ describe('Header tests', () => {
     expect(header).toBeTruthy();
   });
 
-  // test('get data from Local Storage', async () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <ContextProvider>
-  //         <Header />
-  //       </ContextProvider>
-  //     </BrowserRouter>
-  //   );
-  //   const input = await screen.findByPlaceholderText('Enter your query here');
-  //   const searchValue = localStorage.getItem('search');
-  //   searchValue !== null
-  //     ? expect(input.innerHTML).toBe(searchValue)
-  //     : expect(input.innerHTML).toBe('');
-  // });
+  test('get data from Local Storage', async () => {
+    await act(async () => {
+      return renderWithProviders(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
+    });
+    const input = await screen.findByPlaceholderText('Enter your query here');
+    const searchValue = localStorage.getItem('search');
+    searchValue !== null
+      ? expect(input.innerHTML).toBe(searchValue)
+      : expect(input.innerHTML).toBe('');
+  });
 
-  // test('write data in Local Storage', async () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <ContextProvider>
-  //         <Header />
-  //       </ContextProvider>
-  //     </BrowserRouter>
-  //   );
-  //   const input = await screen.findByPlaceholderText('Enter your query here');
-  //   fireEvent.change(input, { target: { value: 'cat' } });
-  //   const button = screen.getByText('Search');
-  //   await userEvent.click(button);
-  //   expect(localStorage.getItem('search')).toBe('cat');
-  // });
+  test('write data in Local Storage', async () => {
+    await act(async () => {
+      return renderWithProviders(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
+    });
+    const input = await screen.findByPlaceholderText('Enter your query here');
+    fireEvent.change(input, { target: { value: 'cat' } });
+    const button = screen.getByText('Search');
+    await userEvent.click(button);
+    expect(localStorage.getItem('search')).toBe('cat');
+  });
 
-  // test('write data in Local Storage', async () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <ContextProvider>
-  //         <Header />
-  //       </ContextProvider>
-  //     </BrowserRouter>
-  //   );
-  //   const select = await screen.findByDisplayValue('25');
-  //   fireEvent.change(select, { target: { value: '10' } });
-  //   await userEvent.click(select);
-  // });
+  test('changing select option', async () => {
+    await act(async () => {
+      return renderWithProviders(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
+    });
+    const select = await screen.findByDisplayValue('25');
+    fireEvent.change(select, { target: { value: '10' } });
+    await userEvent.click(select);
+  });
 });

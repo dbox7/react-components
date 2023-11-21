@@ -1,80 +1,88 @@
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 
 import Details from '../../components/Details/Details';
 import { renderWithProviders } from '../../utils/testWrapper';
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
 
-// jest.mock('../../api', () => {
-//   return {
-//     getGifById: jest.fn(() =>
-//       Promise.resolve({
-//         data: {
-//           analytics: {
-//             onload: { url: '' },
-//             onclick: { url: '' },
-//             onsent: { url: '' },
-//           },
-//           analytics_response_payload: '',
-//           bitly_gif_url: '',
-//           bitly_url: '',
-//           content_url: '',
-//           embed_url: '',
-//           id: '132',
-//           images: {
-//             downsized: {
-//               url: '123',
-//               size: 0,
-//               width: '300',
-//               height: '100',
-//             },
-//             original_still: {
-//               url: '',
-//               width: '',
-//               height: '',
-//             },
-//             preview: {
-//               mp4: '',
-//               mp4_size: 0,
-//               width: '',
-//               height: '',
-//             },
-//             preview_gif: {
-//               url: '123',
-//               size: 0,
-//               width: '',
-//               height: '',
-//             },
-//           },
-//           import_datetime: '10.12.23',
-//           is_sticker: '',
-//           rating: 'B',
-//           slug: '',
-//           source: 'who',
-//           source_post_url: '',
-//           source_tld: 'who',
-//           title: 'Gif',
-//           trending_datetime: '',
-//           type: '',
-//           user: {
-//             description: 'person',
-//             display_name: 'human',
-//             instagram_url: 'inst',
-//             website_url: 'site',
-//           },
-//           username: 'human',
-//         },
-//       })
-//     ),
-//   };
-// });
+const gif = {
+  analytics: {
+    onload: { url: '' },
+    onclick: { url: '' },
+    onsent: { url: '' },
+  },
+  analytics_response_payload: '',
+  bitly_gif_url: '',
+  bitly_url: '',
+  content_url: '',
+  embed_url: '',
+  id: '132',
+  images: {
+    downsized: {
+      url: '123',
+      size: 0,
+      width: '300',
+      height: '100',
+    },
+    original_still: {
+      url: '',
+      width: '',
+      height: '',
+    },
+    preview: {
+      mp4: '',
+      mp4_size: 0,
+      width: '',
+      height: '',
+    },
+    preview_gif: {
+      url: '123',
+      size: 0,
+      width: '',
+      height: '',
+    },
+  },
+  import_datetime: '10.12.23',
+  is_sticker: '',
+  rating: 'B',
+  slug: '',
+  source: 'who',
+  source_post_url: '',
+  source_tld: 'who',
+  title: 'Gif',
+  trending_datetime: '',
+  type: '',
+  user: {
+    description: 'person',
+    display_name: 'human',
+    instagram_url: 'inst',
+    website_url: 'site',
+  },
+  username: 'human',
+};
+
+export const handlers = [
+  http.get('https://api.giphy.com/v1/gifs/132', ({}) => {
+    return HttpResponse.json({ data: gif });
+  }),
+];
 
 describe('Details tests', () => {
+  const server = setupServer(...handlers);
+
+  beforeAll(() => server.listen());
+  afterEach(() => {
+    server.resetHandlers();
+  });
+  afterAll(() => server.close());
+
   test('Render Details', async () => {
     const details = await act(async () => {
       return renderWithProviders(
-        <MemoryRouter initialEntries={['/details/123']}>
+        <MemoryRouter initialEntries={['/details/132']}>
           <Routes>
             <Route path="/details/:id" element={<Details />} />
           </Routes>
@@ -110,36 +118,38 @@ describe('Details tests', () => {
     expect(ratingBlock).toBeTruthy();
   });
 
-  // test('Show loader', async () => {
-  //   act(() => {
-  //     render(
-  //       <MemoryRouter initialEntries={['/details/123']}>
-  //         <Routes>
-  //           <Route path="/details/:id" element={<Details />} />
-  //         </Routes>
-  //       </MemoryRouter>
-  //     );
-  //   });
-  //   await waitFor(() => {
-  //     expect(screen.getByAltText('loader')).toBeTruthy();
-  //   });
-  // });
+  test('Show loader', async () => {
+    act(() => {
+      return renderWithProviders(
+        <MemoryRouter initialEntries={['/details/132']}>
+          <Routes>
+            <Route path="/details/:id" element={<Details />} />
+          </Routes>
+        </MemoryRouter>
+      );
+    });
+    await waitFor(() => {
+      expect(screen.getByAltText('loader')).toBeTruthy();
+    });
+  });
 
-  // test('Closing by button', async () => {
-  //   await act(async () => {
-  //     return render(
-  //       <MemoryRouter initialEntries={['/page/1/details/123']}>
-  //         <Routes>
-  //           <Route path="page/:page" element={<div />} />
-  //           <Route path="page/:page/details/:id" element={<Details />} />
-  //         </Routes>
-  //       </MemoryRouter>
-  //     );
-  //   });
-  //   const closeBtn = await screen.findByText('X');
-  //   await act(async () => {
-  //     await userEvent.click(closeBtn);
-  //   });
-  //   expect(screen.queryByTestId('details')).toBeNull();
-  // });
+  test('Closing by button', async () => {
+    await act(async () =>
+      renderWithProviders(
+        <MemoryRouter initialEntries={['/page/1/details/132']}>
+          <Routes>
+            <Route path="/page/1/details/:id" element={<Details />} />
+            <Route path="/page/NaN" element={<div />} />
+          </Routes>
+        </MemoryRouter>
+      )
+    );
+    const closeBtn = await screen.findByText('X');
+    await act(async () => {
+      await userEvent.click(closeBtn);
+    });
+    await waitFor(() => {
+      expect(screen.queryByTestId('details')).toBeNull();
+    });
+  });
 });

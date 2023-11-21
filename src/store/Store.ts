@@ -3,8 +3,8 @@ import {
   combineReducers,
   configureStore,
 } from '@reduxjs/toolkit';
-import storeSlice from './Slice';
-import { fetchData } from './Fetch';
+import storeSlice from './utils/Slice';
+import { fetchData } from '../utils/api';
 
 const rootReducer = combineReducers({
   storeSlice,
