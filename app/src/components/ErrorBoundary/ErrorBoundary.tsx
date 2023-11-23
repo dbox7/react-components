@@ -1,8 +1,9 @@
 import { ReactNode, Component } from 'react';
 
-import errorImg from '../../assets/error.png';
+import errorImg from '../../../public/error.png';
 
-import './ErrorBoundary.css';
+import '@/components/ErrorBoundary/ErrorBoundary.module.css';
+import Image from 'next/image';
 
 export class ErrorBoundary extends Component<
   { fallback: string; children: ReactNode },
@@ -18,7 +19,7 @@ export class ErrorBoundary extends Component<
     if (this.state.hasError) {
       return (
         <div className="error-boundary">
-          <img
+          <Image
             src={errorImg}
             className="error-boundary__error-img"
             alt="error image"

@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IGif } from './types';
+import { IGif } from '../../../src/utils/types';
+import { HYDRATE } from 'next-redux-wrapper';
 
 const BASE_URL = 'https://api.giphy.com/v1/gifs';
 const API_KEY = 'api_key=bCTu4TIIVb1WkVvZTa6KsDy381RPl2Xj';
@@ -20,6 +21,11 @@ const urlConstructor = (
 export const fetchData = createApi({
   reducerPath: 'fetchData',
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  extractRehydrationInfo(action, { reducerPath }) {
+    if (action.type === HYDRATE) {
+      return action.payload[reducerPath];
+    }
+  },
   endpoints: (builder) => ({
     getAllGifs: builder.query<
       IGif[],

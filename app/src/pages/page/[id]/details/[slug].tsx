@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import users from '../[id]';
+import pageLayout from '../index';
 
 export default function Page() {
   return <Link href={'1'}>Details</Link>;
 }
 
-Page.Layout = users;
+Page.Layout = pageLayout;

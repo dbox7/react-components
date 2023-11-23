@@ -1,52 +1,42 @@
-import { FC, useState } from 'react';
-import { RootState } from '../../store/Store';
-import { useAppDispatch, useAppSelector } from '../../store/utils/Hooks';
-import { saveLimit, saveQuery } from '../../store/utils/Slice';
-import { NavLink } from 'react-router-dom';
+import { FC } from 'react';
+// import { RootState } from '../../../../src/store/Store';
+// import { useAppDispatch, useAppSelector } from '../../../../src/store/utils/Hooks';
+// import { saveLimit, saveQuery } from '../../../../src/store/utils/Slice';
 
-import logo from '../../assets/logo.gif';
+import logo from '../../../public/logo.gif';
 
-import './Header.css';
+import '@/components/Header/Header.module.css';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const Header: FC = () => {
-  const dispatch = useAppDispatch();
-  const { query, limit } = useAppSelector(
-    (state: RootState) => state.storeSlice
-  );
-  const [inputValue, setInputValue] = useState(query);
-
-  const handleClick = () => {
-    dispatch(saveQuery(inputValue));
-    localStorage.setItem('search', inputValue);
-  };
-
   return (
-    <header className="header">
+    <div className="header">
       <div className="header__select-wrap">
         <span>Gifs per page:</span>
         <select
           className="header__select"
-          onChange={(e) => dispatch(saveLimit(Number(e.target.value)))}
+          // onChange={(e) => dispatch(saveLimit(Number(e.target.value)))}
           onClick={(e) => e.stopPropagation()}
-          value={limit}
+          value={25}
         >
           <option value={10}>10</option>
           <option value={25}>25</option>
           <option value={50}>50</option>
         </select>
       </div>
-      <NavLink
-        to={'/page/1'}
+      <Link
+        href={'/page/1'}
         className="header__logo"
         onClick={(e) => e.stopPropagation()}
       >
-        <img src={logo} className="header__logo-img" />
+        <Image src={logo} className="header__logo-img" alt="logo" />
         <span className="header__logo-text">/mirror/</span>
-      </NavLink>
+      </Link>
       <div className="header__search-wrap">
         <span className="header__desc">Let&#39;s find funny gifs!</span>
         <div className="header__search">
-          <input
+          {/* <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
@@ -55,10 +45,10 @@ const Header: FC = () => {
           />
           <button className="button header__button" onClick={handleClick}>
             Search
-          </button>
+          </button> */}
         </div>
       </div>
-    </header>
+    </div>
   );
 };
 
