@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { IGif } from '../../../../src/utils/types';
 
-import '@/components/Card/Card.module.css';
+import style from '@/components/Card/Card.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -15,15 +15,15 @@ const Card: FC<ICard> = ({ item }) => {
   const id = router.query.id as string;
   return (
     <Link
-      href={`${id}/details/${item.id}`}
-      className="card"
+      href={`/page/${id}/details/${item.id}`}
+      className={style.card}
       onClick={(e) => e.stopPropagation()}
       data-testid="card"
     >
       <Image
         src={item.images.preview_gif.url}
         alt="card"
-        className="card__img"
+        className={style.card__img}
         width={30}
         height={30}
         unoptimized={true}

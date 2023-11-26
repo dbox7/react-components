@@ -5,17 +5,17 @@ import { FC } from 'react';
 
 import logo from '../../../public/logo.gif';
 
-import '@/components/Header/Header.module.css';
+import style from '@/components/Header/Header.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const Header: FC = () => {
   return (
-    <div className="header">
-      <div className="header__select-wrap">
+    <div className={style.header}>
+      <div className={style.header__select_wrap}>
         <span>Gifs per page:</span>
         <select
-          className="header__select"
+          className={style.header__select}
           // onChange={(e) => dispatch(saveLimit(Number(e.target.value)))}
           onClick={(e) => e.stopPropagation()}
           value={25}
@@ -27,15 +27,15 @@ const Header: FC = () => {
       </div>
       <Link
         href={'/page/1'}
-        className="header__logo"
+        className={style.header__logo}
         onClick={(e) => e.stopPropagation()}
       >
-        <Image src={logo} className="header__logo-img" alt="logo" />
-        <span className="header__logo-text">/mirror/</span>
+        <Image src={logo} className={style.header__logo_img} alt="logo" />
+        <span className={style.header__logo_text}>/mirror/</span>
       </Link>
-      <div className="header__search-wrap">
-        <span className="header__desc">Let&#39;s find funny gifs!</span>
-        <div className="header__search">
+      <div className={style.header__search_wrap}>
+        <span className={style.header__desc}>Let&#39;s find funny gifs!</span>
+        <div className={style.header__search}>
           {/* <input
             type="text"
             value={inputValue}

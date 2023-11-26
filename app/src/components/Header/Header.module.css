@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.header__select-wrap {
+.header__select_wrap {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -32,18 +32,18 @@
   align-items: flex-end;
 }
 
-.header__logo-img {
+.header__logo_img {
   width: 20%;
   min-width: 250px;
 }
 
-.header__logo-text {
+.header__logo_text {
   margin-bottom: 10px;
   font-size: 150%;
   color: #ffffff;
 }
 
-.header__search-wrap {
+.header__search_wrap {
   display: flex;
   flex-direction: column;
   gap: 15px;

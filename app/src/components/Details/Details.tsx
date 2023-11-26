@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 
-import '@/components/Details/Details.module.css';
+import style from '@/components/Details/Details.module.css';
 import Image from 'next/image';
 import { IGif } from '../../../../src/utils/types';
 
@@ -27,28 +27,31 @@ const Details: FC<detailsProps> = ({ data }) => {
 
   return (
     <div
-      className="details"
+      className={style.details}
       onClick={(e) => e.stopPropagation()}
       data-testid="details"
     >
       <div className={`details__info-wrap ${orientation}`}>
         <div
-          className="details__close"
+          className={style.details__close}
           onClick={() => navigate(`/page/${Number(props.page!)}`)}
         >
           X
         </div>
         <Image
           src={data?.images.downsized.url}
-          className={`details__img ${orientation}`}
+          className={`${style.details__img} ${orientation}`}
           alt="gif"
+          width={30}
+          height={30}
+          unoptimized={true}
         />
-        <div className="details__text-wrap">
-          <div className="details__title">{data?.title}</div>
-          <div className="details__posted">
+        <div className={style.details__text_wrap}>
+          <div className={style.details__title}>{data?.title}</div>
+          <div className={style.details__posted}>
             <b>posted:</b> {data?.import_datetime}
           </div>
-          <div className="details__source">
+          <div className={style.details__source}>
             <b>source: </b>
             {data?.source ? (
               <a href={data?.source} target="_blank" rel="noreferrer">
@@ -59,25 +62,32 @@ const Details: FC<detailsProps> = ({ data }) => {
             )}
           </div>
           {data?.username && (
-            <div className="details__user-wrap">
-              <img className="details__user-img" src={data.user?.avatar_url} />
-              <div className="details__user-info">
-                <div className="details__user-name">
+            <div className={style.details__user_wrap}>
+              <Image
+                className={style.details__user_img}
+                src={data.user!.avatar_url}
+                alt="user"
+                width={30}
+                height={30}
+                unoptimized={true}
+              />
+              <div className={style.details__user_info}>
+                <div className={style.details__user_name}>
                   {data.user?.display_name}
                 </div>
-                <div className="details__user-desc">
+                <div className={style.details__user_desc}>
                   {data.user?.description}
                 </div>
-                <div className="details__user-contacts">
+                <div className={style.details__user_contacts}>
                   <a
                     href={data.user?.website_url}
-                    className="details__user-website"
+                    className={style.details__user_website}
                   >
                     website
                   </a>
                   <a
                     href={data.user?.instagram_url}
-                    className="details__user-instagram"
+                    className={style.details__user_instagram}
                   >
                     instagram
                   </a>
@@ -85,7 +95,7 @@ const Details: FC<detailsProps> = ({ data }) => {
               </div>
             </div>
           )}
-          <div className="details__rating">
+          <div className={style.details__rating}>
             MPAA
             <br />
             rating<span>{data?.rating}</span>

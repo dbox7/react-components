@@ -1,12 +1,5 @@
-import Card from '@/components/Card/Card';
 import List from '@/components/List/List';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import {
-  GetServerSidePropsContext,
-  InferGetServerSidePropsType,
-} from 'next/types';
-import { ReactNode } from 'react';
+import { InferGetServerSidePropsType } from 'next/types';
 
 export default function Page({
   data,
@@ -17,7 +10,7 @@ export default function Page({
   // const router = useRouter();
   // const page = router.query.page;
   return (
-    <div>
+    <div className="data__wrap">
       <List data={data.data} />
     </div>
   );

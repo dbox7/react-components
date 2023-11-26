@@ -4,7 +4,7 @@ import { FC, MouseEvent } from 'react';
 
 import Card from '../Card/Card';
 
-import '@/components/List/List.module.css';
+import style from '@/components/List/List.module.css';
 import { redirect } from 'next/navigation';
 import { useRouter } from 'next/router';
 
@@ -25,9 +25,13 @@ const List: FC<listProps> = ({ data }) => {
   };
 
   return (
-    <div className="list__wrap">
+    <div className={style.list__wrap}>
       <div
-        className={router.query.slug == null ? 'list' : 'list list_detailed'}
+        className={
+          router.query.slug == null
+            ? `${style.list}`
+            : `${style.list} ${style.list_detailed}`
+        }
       >
         {data !== undefined ? (
           data.map((item: IGif, idx: number) => <Card key={idx} item={item} />)
@@ -35,16 +39,16 @@ const List: FC<listProps> = ({ data }) => {
           <span>No items</span>
         )}
       </div>
-      <div className="pagination">
+      <div className={style.pagination}>
         <div
           onClick={(e) => changePage(e, -1)}
-          className="pagination_btn left"
-          data-testid="paginationDecrement"
+          className={`${style.pagination_btn} ${style.left}`}
+          data-testid={style.paginationDecrement}
         />
         <span data-testid="pageCounter">{router.query.id}</span>
         <div
           onClick={(e) => changePage(e, 1)}
-          className="pagination_btn"
+          className={style.pagination_btn}
           data-testid="paginationIncrement"
         />
       </div>

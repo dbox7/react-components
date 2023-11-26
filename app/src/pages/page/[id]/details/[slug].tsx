@@ -30,7 +30,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   );
   const listData = await listRes.json();
   const gifRes = await fetch(
-    `https://api.giphy.com/v1/gifs/TtYT62D5lmuYgJtRNa?api_key=bCTu4TIIVb1WkVvZTa6KsDy381RPl2Xj`
+    `https://api.giphy.com/v1/gifs/${slug}?api_key=bCTu4TIIVb1WkVvZTa6KsDy381RPl2Xj`
   );
   const detailsData = await gifRes.json();
 
