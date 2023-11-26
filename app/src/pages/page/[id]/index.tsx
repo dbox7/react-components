@@ -11,7 +11,6 @@ import { ReactNode } from 'react';
 export default function Page({
   data,
 }: {
-  children: ReactNode;
   data: InferGetServerSidePropsType<typeof getServerSideProps>;
 }) {
   console.log('props: ', data);

@@ -1,28 +1,38 @@
 import Link from 'next/link';
 import pageLayout from '../index';
-import { InferGetServerSidePropsType } from 'next/types';
+import {
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from 'next/types';
 import List from '@/components/List/List';
 import { useRouter } from 'next/router';
+import Details from '@/components/Details/Details';
 
 export default function Page({
   data,
 }: {
   data: InferGetServerSidePropsType<typeof getServerSideProps>;
 }) {
-  const router = useRouter();
+  console.log(data.detailsData.data);
+  const { listData, detailsData } = data;
   return (
     <>
-      <List data={data.data} />
-      <Link href={`/page/${router.query.id}`}>Close</Link>
+      <List data={listData.data} />
+      <Details data={detailsData.data} />
     </>
   );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch(
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const slug = context.query.slug;
+  const listRes = await fetch(
     `https://api.giphy.com/v1/gifs/trending?limit=25&api_key=bCTu4TIIVb1WkVvZTa6KsDy381RPl2Xj`
   );
-  const data = await res.json();
+  const listData = await listRes.json();
+  const gifRes = await fetch(
+    `https://api.giphy.com/v1/gifs/TtYT62D5lmuYgJtRNa?api_key=bCTu4TIIVb1WkVvZTa6KsDy381RPl2Xj`
+  );
+  const detailsData = await gifRes.json();
 
-  return { props: { data } };
+  return { props: { data: { listData, detailsData } } };
 }
