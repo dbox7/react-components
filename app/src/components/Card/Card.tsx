@@ -15,7 +15,7 @@ const Card: FC<ICard> = ({ item }) => {
   const id = router.query.id as string;
   return (
     <Link
-      href={`details/${item.id}`}
+      href={`${id}/details/${item.id}`}
       className="card"
       onClick={(e) => e.stopPropagation()}
       data-testid="card"

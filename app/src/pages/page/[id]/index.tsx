@@ -1,4 +1,5 @@
 import Card from '@/components/Card/Card';
+import List from '@/components/List/List';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -8,26 +9,22 @@ import {
 import { ReactNode } from 'react';
 
 export default function Page({
-  children,
-  ...props
+  data,
 }: {
   children: ReactNode;
-  context: InferGetServerSidePropsType<typeof getServerSideProps>;
+  data: InferGetServerSidePropsType<typeof getServerSideProps>;
 }) {
-  console.log(props);
+  console.log('props: ', data);
   // const router = useRouter();
   // const page = router.query.page;
   return (
     <div>
-      {props.data.data.map((item, idx) => (
-        <Card key={idx} item={item} />
-      ))}
-      {children}
+      <List data={data.data} />
     </div>
   );
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps() {
   const res = await fetch(
     `https://api.giphy.com/v1/gifs/trending?limit=25&api_key=bCTu4TIIVb1WkVvZTa6KsDy381RPl2Xj`
   );
