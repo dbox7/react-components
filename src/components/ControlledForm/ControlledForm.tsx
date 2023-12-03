@@ -2,112 +2,126 @@ import { useState } from 'react';
 import Input from './Input/ControlledInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCtrlForm } from '../../store/reducer';
-import { IFormData } from '../../utils/types';
+import { IRawFormData } from '../../utils/types';
 import { AppDispatch, RootState } from '../../store/store';
 import getBase64 from '../../utils/toBase64';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 const ControlledForm = () => {
-  const state = useSelector((state: RootState) => state);
+  const countries = useSelector((state: RootState) => state.countries);
+  const cntrlForm = useSelector((state: RootState) => state.controlledForm);
   const dispatch = useDispatch<AppDispatch>();
-
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [password, setPassword] = useState('');
-  const [checkPswd, setcheckPswd] = useState('');
-  const [gender, setGender] = useState<IFormData['gender']>('');
-  const [terms, setTerms] = useState(false);
+  const navigate = useNavigate();
   const [country, setCountry] = useState('');
-  const [image, setImage] = useState('');
 
-  const handleFileChange = async (e) => {
-    const img = (await getBase64(e.target.files[0])) as string;
-    console.log(img);
-    setImage(img);
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleFormSubmit = async (data: IRawFormData) => {
+    const image = (await getBase64(data.image![0])) as string;
+    console.log('data', data);
     dispatch(
       updateCtrlForm({
-        email,
-        name,
-        age: Number(age),
-        password,
-        checkPswd,
-        gender,
-        terms,
+        email: data.email,
+        name: data.name,
+        age: data.age,
+        password: data.password,
+        checkPswd: data.checkPswd,
+        gender: data.gender,
+        terms: data.terms,
         image,
         country,
         isUpdated: true,
       })
     );
+    navigate('/');
   };
 
-  console.log(state, country);
+  const schema = yup.object().shape({
+    email: yup.string().email().required(),
+    name: yup
+      .string()
+      .matches(/^[A-Z,А-Я]/)
+      .required(),
+    age: yup.number().min(0).required(),
+    password: yup
+      .string()
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+      )
+      .required(),
+    checkPswd: yup
+      .string()
+      .oneOf([yup.ref('password')])
+      .required(),
+    gender: yup.string<'male' | 'female'>().required(),
+    terms: yup.boolean().isTrue().required(),
+    image: yup
+      .mixed<FileList>()
+      .test('isLoaded', 'Load image', (list) => !!list?.[0])
+      .test(
+        'Right extension',
+        'Load png or jpeg file',
+        (list) => !!list?.[0].name.match(/(jpg|jpeg|png)$/i)
+      )
+      .test(
+        'Check size',
+        'Image should be less 5Mb',
+        (list) => list![0].size < 5242880
+      )
+      .required(),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: 'onBlur',
+  });
+
+  console.log('redux', cntrlForm);
 
   return (
-    <form>
-      <Input
+    <form
+      onSubmit={handleSubmit((data: IRawFormData) => handleFormSubmit(data))}
+    >
+      <input
         type={'text'}
         placeholder={'Enter your name'}
-        info={''}
-        value={name}
-        label={'Name'}
-        changeValue={setName}
+        {...register('name')}
       />
-      <Input
-        type={'text'}
+      <input
+        type={'number'}
         placeholder={'Enter your age'}
-        info={''}
-        value={age}
-        label={'Age'}
-        changeValue={setAge}
+        {...register('age')}
       />
-      <Input
+      <input
         type={'email'}
         placeholder={'Enter email'}
-        info={''}
-        value={email}
-        label={'Email'}
-        changeValue={setEmail}
+        {...register('email')}
       />
-      <Input
+      <input
         type={'password'}
         placeholder={'Enter password'}
-        info={''}
-        value={password}
-        label={'Password'}
-        changeValue={setPassword}
+        {...register('password')}
       />
-      <Input
+      <input
         type={'password'}
         placeholder={'Confirm password'}
-        info={''}
-        value={checkPswd}
-        label={'Confirm password'}
-        changeValue={setcheckPswd}
+        {...register('checkPswd')}
       />
-      <input
-        type="radio"
-        value="male"
-        checked={gender === 'male' ? true : false}
-        onChange={(e) => setGender(e.target.value)}
-      />
-      <input
-        type="radio"
-        value="female"
-        checked={gender === 'female' ? true : false}
-        onChange={(e) => setGender(e.target.value)}
-      />
-      <input type="checkbox" onChange={(e) => setTerms(e.target.checked)} />
+      <input type="radio" value="male" {...register('gender')} />
+      <input type="radio" value="female" {...register('gender')} />
+      <input type="checkbox" {...register('terms')} />
       <select value={country} onChange={(e) => setCountry(e.target.value)}>
-        {state.countries.map((item) => (
+        {countries.map((item) => (
           <option value={item}>{item}</option>
         ))}
       </select>
-      <input type="file" onChange={(e) => handleFileChange(e)} />
-      <button onClick={(e) => handleSubmit(e)}>Submit</button>
+      <input type="file" {...register('image')} />
+      <button type="submit">Submit</button>
     </form>
   );
 };

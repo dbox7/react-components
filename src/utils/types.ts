@@ -10,3 +10,10 @@ export interface IFormData {
   image?: string;
   isUpdated: boolean;
 }
+
+export type IRawFormData = Omit<
+  IFormData,
+  'image' | 'country' | 'isUpdated'
+> & {
+  image: FileList;
+};

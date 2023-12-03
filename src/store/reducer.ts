@@ -3,26 +3,26 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { IFormData } from '../utils/types';
 
 export interface IStoreState {
-  controlledForm: IFormData | Record<string, never>;
-  uncontrolledForm: IFormData | Record<string, never>;
+  controlledForm: IFormData[];
+  uncontrolledForm: IFormData[] | Record<string, never>;
   countries: string[];
 }
 
 const initialState: IStoreState = {
-  controlledForm: {},
-  uncontrolledForm: {},
+  controlledForm: [],
+  uncontrolledForm: [],
   countries: ['Russia', 'USA'],
 };
 
 export const storeSlice = createSlice({
-  name: 'counter',
+  name: 'storeReducer',
   initialState,
   reducers: {
     updateCtrlForm: (state, action: PayloadAction<IFormData>) => {
-      state.controlledForm = action.payload;
+      state.controlledForm.push(action.payload);
     },
     updateUnCtrlForm: (state, action: PayloadAction<IFormData>) => {
-      state.uncontrolledForm = action.payload;
+      state.uncontrolledForm.push(action.payload);
     },
   },
 });
