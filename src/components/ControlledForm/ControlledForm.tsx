@@ -5,10 +5,10 @@ import { updateCtrlForm } from '../../store/reducer';
 import { IRawFormData } from '../../utils/types';
 import { AppDispatch, RootState } from '../../store/store';
 import getBase64 from '../../utils/toBase64';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { schema } from '../../utils/validation';
 
 const ControlledForm = () => {
   const countries = useSelector((state: RootState) => state.countries);
@@ -36,41 +36,6 @@ const ControlledForm = () => {
     );
     navigate('/');
   };
-
-  const schema = yup.object().shape({
-    email: yup.string().email().required(),
-    name: yup
-      .string()
-      .matches(/^[A-Z,А-Я]/)
-      .required(),
-    age: yup.number().min(0).required(),
-    password: yup
-      .string()
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-      )
-      .required(),
-    checkPswd: yup
-      .string()
-      .oneOf([yup.ref('password')])
-      .required(),
-    gender: yup.string<'male' | 'female'>().required(),
-    terms: yup.boolean().isTrue().required(),
-    image: yup
-      .mixed<FileList>()
-      .test('isLoaded', 'Load image', (list) => !!list?.[0])
-      .test(
-        'Right extension',
-        'Load png or jpeg file',
-        (list) => !!list?.[0].name.match(/(jpg|jpeg|png)$/i)
-      )
-      .test(
-        'Check size',
-        'Image should be less 5Mb',
-        (list) => list![0].size < 5242880
-      )
-      .required(),
-  });
 
   const {
     register,

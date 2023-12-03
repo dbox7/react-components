@@ -4,7 +4,7 @@ import { IFormData } from '../utils/types';
 
 export interface IStoreState {
   controlledForm: IFormData[];
-  uncontrolledForm: IFormData[] | Record<string, never>;
+  uncontrolledForm: IFormData[];
   countries: string[];
 }
 
