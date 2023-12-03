@@ -3,10 +3,10 @@ export interface IFormData {
   age: number;
   email: string;
   password: string;
-  doublePass: string;
-  gender: 'male' | 'female';
+  checkPswd: string;
+  gender: 'male' | 'female' | '';
   terms: boolean;
   country: string;
-  image: string;
+  image?: string;
   isUpdated: boolean;
 }
