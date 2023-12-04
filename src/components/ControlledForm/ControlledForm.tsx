@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { schema } from '../../utils/validation';
+import FormLayout from '../FormLayout/FormLayout';
 
 const ControlledForm = () => {
   const countries = useSelector((state: RootState) => state.countries);
@@ -49,45 +50,21 @@ const ControlledForm = () => {
   console.log('redux', cntrlForm);
 
   return (
-    <form
-      onSubmit={handleSubmit((data: IRawFormData) => handleFormSubmit(data))}
-    >
-      <input
-        type={'text'}
-        placeholder={'Enter your name'}
-        {...register('name')}
-      />
-      <input
-        type={'number'}
-        placeholder={'Enter your age'}
-        {...register('age')}
-      />
-      <input
-        type={'email'}
-        placeholder={'Enter email'}
-        {...register('email')}
-      />
-      <input
-        type={'password'}
-        placeholder={'Enter password'}
-        {...register('password')}
-      />
-      <input
-        type={'password'}
-        placeholder={'Confirm password'}
-        {...register('checkPswd')}
-      />
-      <input type="radio" value="male" {...register('gender')} />
-      <input type="radio" value="female" {...register('gender')} />
-      <input type="checkbox" {...register('terms')} />
-      <select value={country} onChange={(e) => setCountry(e.target.value)}>
-        {countries.map((item) => (
-          <option value={item}>{item}</option>
-        ))}
-      </select>
-      <input type="file" {...register('image')} />
-      <button type="submit">Submit</button>
-    </form>
+    <FormLayout
+      formProps={{
+        onSubmit: handleSubmit((data: IRawFormData) => handleFormSubmit(data)),
+      }}
+      nameProps={register('name')}
+      ageProps={register('age')}
+      emailProps={register('email')}
+      passwordProps={register('password')}
+      checkPswdProps={register('checkPswd')}
+      genderProps={register('gender')}
+      termsProps={register('terms')}
+      countryProps={{ name: 'country' }}
+      countries={countries}
+      fileProps={register('image')}
+    />
   );
 };
 
