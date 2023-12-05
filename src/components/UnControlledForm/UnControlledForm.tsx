@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { BaseSyntheticEvent, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
 import { schema } from '../../utils/validation';
@@ -14,7 +14,7 @@ const UncontrolledForm = () => {
   const countries = useSelector((state: RootState) => state.countries);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: BaseSyntheticEvent) => {
     e.preventDefault();
     if (!formRef.current) {
       return;
@@ -33,7 +33,6 @@ const UncontrolledForm = () => {
       country: formData.get('country') as string,
       isUpdated: true,
     };
-    console.log(state);
 
     schema
       .validate(state, { abortEarly: true })
@@ -46,37 +45,19 @@ const UncontrolledForm = () => {
   };
 
   return (
-    <>
-      <form onSubmit={(e) => handleSubmit(e)} ref={formRef}>
-        <input type={'text'} name="name" placeholder={'Enter your name'} />
-        <input type={'number'} name="age" placeholder={'Enter your age'} />
-        <input type={'email'} name="email" placeholder={'Enter email'} />
-        <input
-          type={'password'}
-          name="password"
-          placeholder={'Enter password'}
-        />
-        <input
-          type={'password'}
-          name="checkPswd"
-          placeholder={'Confirm password'}
-        />
-        <input type="radio" name="gender" value="male" />
-        <input type="radio" name="gender" value="female" />
-        <input type="checkbox" name="terms" />
-        <select name="country">
-          {countries.map((item) => (
-            <option value={item}>{item}</option>
-          ))}
-        </select>
-        <input type="file" name="file" />
-        <button type="submit">Submit</button>
-      </form>
-      <FormLayout
-        nameProps={{ name: 'name', disabled: false }}
-        countryProps={{ name: 'country' }}
-      />
-    </>
+    <FormLayout
+      formProps={{ onSubmit: handleSubmit, ref: formRef }}
+      nameProps={{ name: 'name' }}
+      ageProps={{ name: 'age' }}
+      emailProps={{ name: 'email' }}
+      passwordProps={{ name: 'password' }}
+      checkPswdProps={{ name: 'checkPswd' }}
+      genderProps={{ name: 'gender' }}
+      termsProps={{ name: 'terms' }}
+      countryProps={{ name: 'country' }}
+      countries={countries}
+      fileProps={{ name: 'file' }}
+    />
   );
 };
 

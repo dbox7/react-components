@@ -1,6 +1,8 @@
+import { BaseSyntheticEvent } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form/dist/types';
 
 interface IProps {
+  value?: string;
   name?: string;
 }
 
@@ -18,7 +20,7 @@ const FormLayout = ({
   fileProps,
 }: {
   formProps: {
-    onSubmit?: () => void;
+    onSubmit?: (e: BaseSyntheticEvent) => void;
     ref?: React.LegacyRef<HTMLFormElement>;
     disabled?: boolean;
   };
@@ -29,7 +31,7 @@ const FormLayout = ({
   checkPswdProps: IProps | UseFormRegisterReturn;
   genderProps: IProps | UseFormRegisterReturn;
   termsProps: IProps | UseFormRegisterReturn;
-  countryProps: { onChange?: () => void; name?: string };
+  countryProps: { onChange?: () => void; value?: string; name?: string };
   countries: string[];
   fileProps: IProps | UseFormRegisterReturn;
 }) => {
@@ -65,25 +67,23 @@ const FormLayout = ({
         {...checkPswdProps}
         disabled={formProps.disabled}
       />
-      <input
-        type="radio"
-        value="male"
-        {...genderProps}
-        disabled={formProps.disabled}
-      />
-      <input
-        type="radio"
-        value="female"
-        {...genderProps}
-        disabled={formProps.disabled}
-      />
+      {'value' in genderProps ? (
+        <input type={'text'} {...genderProps} disabled={formProps.disabled} />
+      ) : (
+        <>
+          <input type="radio" value="male" {...genderProps} />
+          <input type="radio" value="female" {...genderProps} />
+        </>
+      )}
       <input type="checkbox" {...termsProps} disabled={formProps.disabled} />
       <select {...countryProps} disabled={formProps.disabled}>
-        {countries.map((item) => (
-          <option value={item}>{item}</option>
-        ))}
+        {countries?.map((item) => <option value={item}>{item}</option>)}
       </select>
-      <input type="file" {...fileProps} disabled={formProps.disabled} />
+      {'value' in fileProps ? (
+        <img src={fileProps.value} alt="img" />
+      ) : (
+        <input type="file" {...fileProps} disabled={formProps.disabled} />
+      )}
       {!formProps.disabled && <button type="submit">Submit</button>}
     </form>
   );
