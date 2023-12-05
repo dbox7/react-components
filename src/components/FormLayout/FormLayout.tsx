@@ -1,5 +1,6 @@
 import { BaseSyntheticEvent } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form/dist/types';
+import styles from './FormLayout.module.css';
 
 interface IProps {
   value?: string;
@@ -31,12 +32,12 @@ const FormLayout = ({
   checkPswdProps: IProps | UseFormRegisterReturn;
   genderProps: IProps | UseFormRegisterReturn;
   termsProps: IProps | UseFormRegisterReturn;
-  countryProps: { onChange?: () => void; value?: string; name?: string };
-  countries: string[];
+  countryProps: IProps | UseFormRegisterReturn;
+  countries?: string[];
   fileProps: IProps | UseFormRegisterReturn;
 }) => {
   return (
-    <form {...formProps}>
+    <form {...formProps} className={(styles.form, styles.form_absolute)}>
       <input
         type={'text'}
         placeholder={'Enter your name'}
@@ -75,12 +76,13 @@ const FormLayout = ({
           <input type="radio" value="female" {...genderProps} />
         </>
       )}
-      <input type="checkbox" {...termsProps} disabled={formProps.disabled} />
-      <select {...countryProps} disabled={formProps.disabled}>
-        {countries?.map((item) => <option value={item}>{item}</option>)}
-      </select>
+      <input type="checkbox" disabled={formProps.disabled} {...termsProps} />
+      <input list="countries" {...countryProps} disabled={formProps.disabled} />
+      <datalist id="countries">
+        {countries?.map((country) => <option key={country} value={country} />)}
+      </datalist>
       {'value' in fileProps ? (
-        <img src={fileProps.value} alt="img" />
+        <img src={fileProps.value} alt="img" className={styles.image} />
       ) : (
         <input type="file" {...fileProps} disabled={formProps.disabled} />
       )}

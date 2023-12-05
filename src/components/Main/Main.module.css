@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.section {
+  position: relative;
+  display: flex;
+
+  max-width: 45%;
+}

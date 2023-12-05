@@ -11,9 +11,6 @@ export interface IFormData {
   isUpdated: boolean;
 }
 
-export type IRawFormData = Omit<
-  IFormData,
-  'image' | 'country' | 'isUpdated'
-> & {
+export type IRawFormData = Omit<IFormData, 'image' | 'isUpdated'> & {
   image: FileList;
 };

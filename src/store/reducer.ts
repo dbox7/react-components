@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { IFormData } from '../utils/types';
+import { COUNTRIES } from '../utils/constants';
 
 export interface IStoreState {
   controlledForm: IFormData[];
@@ -11,7 +12,7 @@ export interface IStoreState {
 const initialState: IStoreState = {
   controlledForm: [],
   uncontrolledForm: [],
-  countries: ['Russia', 'USA'],
+  countries: [...COUNTRIES],
 };
 
 export const storeSlice = createSlice({

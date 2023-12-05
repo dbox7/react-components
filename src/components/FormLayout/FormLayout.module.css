@@ -1,0 +1,18 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form_absolute {
+  position: absolute;
+}
+
+.form_absolute:nth-child(n+2) {
+  top: 15px;
+}
+
+.image {
+  width: 100%;
+  max-width: 250px;
+  object-fit: cover;
+}

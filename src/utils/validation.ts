@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { COUNTRIES } from './constants';
 
 export const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -18,6 +19,10 @@ export const schema = yup.object().shape({
     .oneOf([yup.ref('password')])
     .required(),
   gender: yup.string<'male' | 'female'>().required(),
+  country: yup
+    .string()
+    .oneOf([...COUNTRIES])
+    .required(),
   terms: yup.boolean().isTrue().required(),
   image: yup
     .mixed<FileList>()

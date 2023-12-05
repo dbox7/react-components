@@ -16,7 +16,6 @@ const ControlledForm = () => {
   const cntrlForm = useSelector((state: RootState) => state.controlledForm);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const [country, setCountry] = useState('');
 
   const handleFormSubmit = async (data: IRawFormData) => {
     const image = (await getBase64(data.image![0])) as string;
@@ -31,7 +30,7 @@ const ControlledForm = () => {
         gender: data.gender,
         terms: data.terms,
         image,
-        country,
+        country: data.country,
         isUpdated: true,
       })
     );
@@ -61,7 +60,7 @@ const ControlledForm = () => {
       checkPswdProps={register('checkPswd')}
       genderProps={register('gender')}
       termsProps={register('terms')}
-      countryProps={{ name: 'country' }}
+      countryProps={register('country')}
       countries={countries}
       fileProps={register('image')}
     />
