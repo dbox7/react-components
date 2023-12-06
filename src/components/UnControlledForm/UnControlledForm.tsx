@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useRef } from 'react';
+import { BaseSyntheticEvent, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
 import { schema } from '../../utils/validation';
@@ -7,12 +7,16 @@ import getBase64 from '../../utils/toBase64';
 import { IFormData } from '../../utils/types';
 import { useNavigate } from 'react-router-dom';
 import FormLayout from '../FormLayout/FormLayout';
+import * as yup from 'yup';
 
 const UncontrolledForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const dispatch = useDispatch<AppDispatch>();
   const countries = useSelector((state: RootState) => state.countries);
   const navigate = useNavigate();
+  const [errors, setErrors] = useState<{ [key: string]: { message: string } }>(
+    {}
+  );
 
   const handleSubmit = (e: BaseSyntheticEvent) => {
     e.preventDefault();
@@ -35,17 +39,31 @@ const UncontrolledForm = () => {
     };
 
     schema
-      .validate(state, { abortEarly: true })
+      .validate(state, { abortEarly: false })
       .then(async () => {
         state.image = (await getBase64(state.image![0] as File)) as string;
         dispatch(updateUnCtrlForm(state));
         navigate('/');
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err.errors);
+        if (err instanceof yup.ValidationError) {
+          const validationErrors = err.inner.reduce((errors, error) => {
+            return {
+              ...errors,
+              [error.path as string]: { message: error.message },
+            };
+          }, {});
+          console.log(validationErrors);
+          setErrors(validationErrors);
+          return;
+        }
+      });
   };
 
   return (
     <FormLayout
+      errors={errors}
       formProps={{ onSubmit: handleSubmit, ref: formRef }}
       nameProps={{ name: 'name' }}
       ageProps={{ name: 'age' }}

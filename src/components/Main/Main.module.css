@@ -5,9 +5,13 @@
   margin: auto;
 }
 
-.section {
-  position: relative;
+.forms_wrapper {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 10px;
+}
 
-  max-width: 45%;
+.section {
+  width: 45%;
 }

@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import Input from './Input/ControlledInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCtrlForm } from '../../store/reducer';
 import { IRawFormData } from '../../utils/types';
@@ -13,13 +11,11 @@ import FormLayout from '../FormLayout/FormLayout';
 
 const ControlledForm = () => {
   const countries = useSelector((state: RootState) => state.countries);
-  const cntrlForm = useSelector((state: RootState) => state.controlledForm);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const handleFormSubmit = async (data: IRawFormData) => {
     const image = (await getBase64(data.image![0])) as string;
-    console.log('data', data);
     dispatch(
       updateCtrlForm({
         email: data.email,
@@ -46,10 +42,9 @@ const ControlledForm = () => {
     mode: 'onBlur',
   });
 
-  console.log('redux', cntrlForm);
-
   return (
     <FormLayout
+      errors={errors}
       formProps={{
         onSubmit: handleSubmit((data: IRawFormData) => handleFormSubmit(data)),
       }}

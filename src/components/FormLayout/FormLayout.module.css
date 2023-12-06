@@ -1,6 +1,18 @@
 .form {
   display: flex;
   flex-direction: column;
+  min-width: 220px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.ьшт_width {
+  width: 35%;
+}
+
+.max_width {
+  width: 70%;
 }
 
 .form_absolute {
@@ -12,7 +24,16 @@
 }
 
 .image {
-  width: 100%;
-  max-width: 250px;
+  width: 220px;
+  height: 220px;
   object-fit: cover;
+}
+
+label {
+  font-weight: bold;
+  margin: 15px 0 10px;
+}
+
+label:first-child {
+  margin-top: 0;
 }

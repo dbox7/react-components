@@ -12,8 +12,11 @@ function App() {
     <ErrorBoundary fallback="Something gone wrong">
       <Provider store={store}>
         <BrowserRouter>
-          <Link to={'/controlled_form'}>Controlled form</Link>
-          <Link to={'/uncontrolled_form'}>Uncontrolled form</Link>
+          <header className="header">
+            <Link to={'/controlled_form'}>Controlled form</Link>
+            <Link to={'/'}>Home</Link>
+            <Link to={'/uncontrolled_form'}>Uncontrolled form</Link>
+          </header>
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/controlled_form" element={<ControlledForm />} />
