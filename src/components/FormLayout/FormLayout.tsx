@@ -58,10 +58,7 @@ const FormLayout: FC<IFormProps> = ({
           {...nameProps}
           disabled={formProps.disabled}
         />
-        <div
-          className="error"
-          data-error={errors.name ? errors.name.message : ''}
-        />
+        <div className="error" data-error={errors?.name?.message || ''} />
         <label htmlFor="age">Age</label>
         <input
           id="age"
