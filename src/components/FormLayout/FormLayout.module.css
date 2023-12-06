@@ -19,7 +19,7 @@
   position: absolute;
 }
 
-.form_absolute:nth-child(n+2) {
+.form_absolute:nth-child(n + 2) {
   top: 15px;
 }
 
