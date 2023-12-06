@@ -1,0 +1,42 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card {
+  padding: 2em;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.header a {
+  min-width: 200px;
+}
+
+.header a:nth-child(2) {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.error {
+  height: 0.5rem;
+}
+
+.error::before {
+  content: attr(data-error);
+  color: red;
+  font-size: 0.8rem;
+  width: fit-content;
+  position: relative;
+}
