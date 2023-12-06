@@ -46,7 +46,7 @@ const FormLayout: FC<IFormProps> = ({
       <form
         {...formProps}
         className={`${styles.form} ${
-          formProps.disabled ? styles.form : styles.max_width
+          !formProps.disabled ? styles.min_width : styles.max_width
         }`}
         noValidate
       >
