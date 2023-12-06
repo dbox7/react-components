@@ -9,19 +9,18 @@ export const schema = yup.object().shape({
     .matches(/^[A-Z,А-Я]/, 'First letter capitalized'),
   age: yup
     .number()
-    .typeError('Enter integer number')
+    .positive('Age should be more than 0')
     .required('Enter your age')
-    .positive('Age should be more than 0'),
+    .typeError('Enter integer number'),
   password: yup
     .string()
-    .required('Enter password')
     .min(4)
     .max(24)
     .matches(/[A-Z]/, 'Password should have at least 1 uppercase letter')
     .matches(/[a-z]/, 'Password should have at least 1 lowercase letter')
     .matches(/[0-9]/, 'Password should have at least 1 number')
     .matches(/[@$!%*#?&]/, 'Password should have at least 1 special character')
-    .required(),
+    .required('Enter password'),
   checkPswd: yup
     .string()
     .required('Confirm your password')
