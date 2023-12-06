@@ -15,10 +15,13 @@ export const schema = yup.object().shape({
   password: yup
     .string()
     .required('Enter password')
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      'At least 1 number, 1 uppercased letter, 1 lowercased letter, 1 special character'
-    ),
+    .min(4)
+    .max(24)
+    .matches(/[A-Z]/, 'Password should have at least 1 uppercase letter')
+    .matches(/[a-z]/, 'Password should have at least 1 lowercase letter')
+    .matches(/[0-9]/, 'Password should have at least 1 number')
+    .matches(/[@$!%*#?&]/, 'Password should have at least 1 special character')
+    .required(),
   checkPswd: yup
     .string()
     .required('Confirm your password')

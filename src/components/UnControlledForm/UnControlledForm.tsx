@@ -46,7 +46,6 @@ const UncontrolledForm = () => {
         navigate('/');
       })
       .catch((err) => {
-        console.log(err.errors);
         if (err instanceof yup.ValidationError) {
           const validationErrors = err.inner.reduce((errors, error) => {
             return {
@@ -54,7 +53,6 @@ const UncontrolledForm = () => {
               [error.path as string]: { message: error.message },
             };
           }, {});
-          console.log(validationErrors);
           setErrors(validationErrors);
           return;
         }
